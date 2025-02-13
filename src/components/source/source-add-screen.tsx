@@ -1,5 +1,3 @@
-// TODO typesafe the form data
-/* eslint-disable @typescript-eslint/no-explicit-any,@typescript-eslint/no-unused-vars */
 'use client';
 
 import {Document, Page, pdfjs} from 'react-pdf';
@@ -21,6 +19,8 @@ import dynamic from "next/dynamic";
 import {HealthDataParserVisionListResponse} from "@/app/api/health-data-parser/visions/route";
 import {HealthDataGetResponse} from "@/app/api/health-data/[id]/route";
 import {HealthDataParserDocumentListResponse} from "@/app/api/health-data-parser/documents/route";
+import { getAuthUrl, getToken } from '@/lib/google-health/auth';
+import { getGoogleHealthData } from '@/lib/google-health/data';
 
 const Select = dynamic(() => import('react-select'), {ssr: false});
 
@@ -55,6 +55,7 @@ interface Field {
 interface AddSourceDialogProps {
     onFileUpload: (e: ChangeEvent<HTMLInputElement>) => void;
     onAddSymptoms: (date: string) => void;
+    onImportGoogleHealthData: () => void;
     isSetUpVisionParser: boolean;
     isSetUpDocumentParser: boolean;
 }
@@ -105,6 +106,10 @@ const HealthDataType = {
     SYMPTOMS: {
         id: 'SYMPTOMS',
         name: 'Symptoms'
+    },
+    GOOGLE_HEALTH: {
+        id: 'GOOGLE_HEALTH',
+        name: 'Google Health'
     }
 };
 
@@ -173,7 +178,8 @@ const AddSourceDialog: React.FC<AddSourceDialogProps> = ({
                                                              isSetUpVisionParser,
                                                              isSetUpDocumentParser,
                                                              onFileUpload,
-                                                             onAddSymptoms
+                                                             onAddSymptoms,
+                                                             onImportGoogleHealthData
                                                          }) => {
     const [open, setOpen] = useState(false);
     const [showSettingsAlert, setShowSettingsAlert] = useState(false);
@@ -202,6 +208,11 @@ const AddSourceDialog: React.FC<AddSourceDialogProps> = ({
     const handleAddSymptoms = () => {
         const today = new Date().toISOString().split('T')[0];
         onAddSymptoms(today);
+        setOpen(false);
+    };
+
+    const handleImportGoogleHealthData = async () => {
+        onImportGoogleHealthData();
         setOpen(false);
     };
 
@@ -256,6 +267,17 @@ const AddSourceDialog: React.FC<AddSourceDialogProps> = ({
                                 <p className="text-sm text-gray-500">Record today&#39;s symptoms</p>
                             </div>
                         </button>
+
+                        <button
+                            className="flex items-center gap-4 p-4 border rounded-lg cursor-pointer hover:bg-gray-50 w-full"
+                            onClick={handleImportGoogleHealthData}
+                        >
+                            <Activity className="w-6 h-6 text-gray-500"/>
+                            <div className="flex-1 text-left">
+                                <h3 className="font-medium">Import Google Health Data</h3>
+                                <p className="text-sm text-gray-500">Import data from Google Health</p>
+                            </div>
+                        </button>
                     </div>
                 </DialogContent>
             </Dialog>
@@ -296,6 +318,8 @@ const HealthDataItem: React.FC<HealthDataItemProps> = ({healthData, isSelected, 
             case HealthDataType.PERSONAL_INFO.id:
                 return <User className="h-5 w-5"/>;
             case HealthDataType.SYMPTOMS.id:
+                return <Activity className="h-5 w-5"/>;
+            case HealthDataType.GOOGLE_HEALTH.id:
                 return <Activity className="h-5 w-5"/>;
             default:
                 return <FileText className="h-5 w-5"/>;
@@ -1112,6 +1136,39 @@ export default function SourceAddScreen() {
         }
     };
 
+    const handleImportGoogleHealthData = async () => {
+        try {
+            const authUrl = getAuthUrl();
+            const authCode = prompt(`Please visit the following URL to authorize the app:\n\n${authUrl}\n\nThen enter the authorization code here:`);
+            if (!authCode) {
+                alert('Authorization code is required to import Google Health data.');
+                return;
+            }
+
+            const tokens = await getToken(authCode);
+            const healthData = await getGoogleHealthData(tokens.access_token);
+
+            const now = new Date();
+            const body = {
+                id: cuid(),
+                type: HealthDataType.GOOGLE_HEALTH.id,
+                data: healthData,
+                status: 'COMPLETED',
+                filePath: null,
+                fileType: null,
+                createdAt: now,
+                updatedAt: now
+            } as HealthData;
+
+            setSelectedId(body.id);
+            setFormData(body.data as Record<string, any>);
+            await mutate({healthDataList: [...healthDataList?.healthDataList || [], body]});
+        } catch (error) {
+            console.error('Failed to import Google Health data:', error);
+            alert('Failed to import Google Health data. Please try again.');
+        }
+    };
+
     useEffect(() => {
         if (visionDataList?.visions && visionParser === undefined) {
             const {name, models} = visionDataList.visions[0];
@@ -1140,7 +1197,8 @@ export default function SourceAddScreen() {
                             isSetUpVisionParser={visionParser !== undefined && visionParserModel !== undefined && visionParserApiKey.length > 0}
                             isSetUpDocumentParser={documentParser !== undefined && documentParserModel !== undefined && documentParserApiKey.length > 0}
                             onFileUpload={handleFileUpload}
-                            onAddSymptoms={handleAddSymptoms}/>
+                            onAddSymptoms={handleAddSymptoms}
+                            onImportGoogleHealthData={handleImportGoogleHealthData}/>
                         <div className="flex-1 overflow-y-auto">
                             {healthDataList?.healthDataList?.map((item) => (
                                 <HealthDataItem
