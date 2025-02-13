@@ -13,12 +13,20 @@ services:
     ports:
       - "5432:5432"
 
+  sqlite:
+    image: nouchka/sqlite3
+    restart: always
+    volumes:
+      - sqlite_data:/var/lib/sqlite3/data
+    environment:
+      SQLITE_DB: ${SQLITE_DB}
+
   app:
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database:5432/${POSTGRES_DB}
+        - DATABASE_URL=${DATABASE_URL}
     depends_on:
       - database
     volumes:
@@ -27,8 +35,9 @@ services:
       - "3000:3000"
     restart: always
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database:5432/${POSTGRES_DB}
+      DATABASE_URL: ${DATABASE_URL}
 
 volumes:
   postgres_data:
+  sqlite_data:
   app_data:
