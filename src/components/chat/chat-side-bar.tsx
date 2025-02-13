@@ -18,6 +18,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip"
+import {RAGDocumentParser, RAGVisionParser} from "@/lib/health-data/parser/rag";
 
 interface ChatSideBarProps {
     isLeftSidebarOpen: boolean;

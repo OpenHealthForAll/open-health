@@ -1,5 +1,6 @@
 import prisma, {Prisma} from "@/lib/prisma";
 import {NextResponse} from "next/server";
+import {RAGDocumentParser, RAGVisionParser} from "@/lib/health-data/parser/rag";
 
 export interface ChatRoom extends Prisma.ChatRoomGetPayload<{
     select: {
