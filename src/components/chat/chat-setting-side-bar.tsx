@@ -10,6 +10,7 @@ import {ChatRoomGetResponse} from "@/app/api/chat-rooms/[id]/route";
 import {AssistantModePatchRequest} from "@/app/api/assistant-modes/[id]/route";
 import {LLMProvider, LLMProviderListResponse} from "@/app/api/llm-providers/route";
 import {LLMProviderModel, LLMProviderModelListResponse} from "@/app/api/llm-providers/[id]/models/route";
+import {RAGDocumentParser, RAGVisionParser} from "@/lib/health-data/parser/rag";
 
 interface ChatSettingSideBarProps {
     isRightSidebarOpen: boolean;
