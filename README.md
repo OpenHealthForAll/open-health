@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**AI Health Assistant | Powered by Your Data, Running Locally**
+**AI Health Assistant | Powered by Your Data**
 
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Web-blue?style=for-the-badge" alt="Platform">
@@ -28,7 +28,7 @@
 ## 🌟 Overview
 
 > OpenHealth helps you **take charge of your health data**. By leveraging AI and your personal health information,
-> OpenHealth provides a private and locally-run assistant that helps you better understand and manage your health.
+> OpenHealth provides a private assistant that helps you better understand and manage your health. You can run it completely locally for maximum privacy.
 
 ## ✨ Project Features
 
@@ -132,16 +132,17 @@ graph LR
    # Copy environment file
    cp .env.example .env
 
-   # Add API keys to .env file:
-   # UPSTAGE_API_KEY - For parsing (You can get $10 credit without card registration by signing up at https://www.upstage.ai)
-   # OPENAI_API_KEY - For enhanced parsing capabilities
-
    # Start the application using Docker/Podman Compose
    docker/podman compose --env-file .env up
    ```
 
    For existing users, use:
    ```bash
+   # Generate ENCRYPTION_KEY for .env file:
+   # Run the command below and add the output to ENCRYPTION_KEY in .env
+   echo $(head -c 32 /dev/urandom | base64)
+
+   # Rebuild and start the application
    docker/podman compose --env-file .env up --build
    ```
    to rebuild the image. Run this also if you make any modifications to the .env file.
@@ -149,7 +150,7 @@ graph LR
 3. **Access OpenHealth:**
    Open your browser and navigate to `http://localhost:3000` to begin using OpenHealth.
 
-> **Note:** The system consists of two main components: parsing and LLM. Currently, parsing utilizes Upstage and OpenAI APIs (which showed the best performance in our testing) with a local parser coming soon, while the LLM component can run fully locally using Ollama.
+> **Note:** The system consists of two main components: parsing and LLM. For parsing, you can use docling for full local execution, while the LLM component can run fully locally using Ollama.
 
 > **Note:** If you're using Ollama with Docker, make sure to set the Ollama API endpoint to: `http://docker.for.mac.localhost:11434` on a Mac or `http://host.docker.internal:11434` on Windows.
 

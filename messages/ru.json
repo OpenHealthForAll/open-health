@@ -1,0 +1,179 @@
+{
+  "HomePage": {
+  },
+  "Chat": {
+    "inputPlaceholder": "Введите сообщение..."
+  },
+  "Feedback": {
+    "helpMessage": "Помогите OpenHealth решать проблемы со здоровьем для вас и многих других",
+    "shareFeedback": "Оставить отзыв"
+  },
+  "ChatSideBar": {
+    "sources": "Источники",
+    "numberOfFiles": "{value, number} файлов",
+    "countOfTokens": "{value, number} токенов",
+    "viewAggregatedSources": "Просмотр агрегированных источников",
+    "aggregatedSources": "Агрегированные источники",
+    "manageSources": "Управление источниками",
+    "newChat": "Новый чат",
+    "copy": "Копировать",
+    "download": "Скачать",
+    "chatDeleteTitle": "Удалить чат",
+    "chatDeleteMessage": "Вы уверены, что хотите удалить этот чат?",
+    "chatDeleteMessageDetail": "Это действие нельзя отменить.",
+    "cancel": "Отмена",
+    "delete": "Удалить"
+  },
+  "ChatSettingSideBar": {
+    "modelSettings": "Настройки модели",
+    "systemPrompt": "Системный промпт",
+    "assistantMode": "Режим ассистента",
+    "selectModel": "Выбрать модель",
+    "selectCompany": "Выбрать компанию",
+    "noModelsFound": "Модели не найдены.",
+    "enterApiKey": "Введите API ключ",
+    "show": "Показать",
+    "hide": "Скрыть"
+  },
+  "SourceManagement": {
+    "title": "Управление источниками",
+    "addSource": "Добавить источник",
+    "addNewSource": "Добавить новый источник",
+    "personalInfo": "Личная информация",
+    "parsingSettings": "Настройки парсинга",
+    "parsingSettingsDescription": "Модели Vision и OCR используются совместно для улучшения производительности парсинга.",
+    "visionModel": "Модель Vision",
+    "visionModelDescription": "Можно использовать только модели с возможностями компьютерного зрения.",
+    "documentModel": "Модель документов",
+    "documentModelDescription": "Docling - это модель парсинга с открытым исходным кодом, работающая локально.",
+    "documentModelDoclingGithub": "Github",
+    "documentModelUpstage": "Upstage",
+    "documentModelUpstageDescription": "Upstage показал лучшую производительность в наших тестах.",
+    "documentModelUpstageDescription2": "предлагает $10 бесплатных кредитов для новых регистраций, карта не требуется.",
+    "name": "Имя",
+    "birthdate": "Дата рождения",
+    "height": "Рост",
+    "weight": "Вес",
+    "bloodType": "Группа крови",
+    "familyHistory": "Семейная история",
+    "select": "Выбрать",
+    "extractedData": "Извлеченные данные",
+    "update": "Обновить",
+    "uploadFiles": "Загрузить файлы",
+    "uploadFilesDescription": "Добавить изображения или PDF файлы.",
+    "uploadSymptoms": "Новые симптомы",
+    "uploadSymptomsDescription": "Записать сегодняшние симптомы.",
+    "date": "Дата",
+    "endDate": "Дата окончания",
+    "description": "Описание",
+    "symptoms": "Симптомы",
+    "selectModel": "Выбрать модель",
+    "apiKey": "API ключ",
+    "enterYourAPIKey": "Введите ваш API ключ",
+    "enterYourAPIUrl": "Введите ваш API URL"
+  },
+  "DynamicForm": {
+    "selectPlaceholder": "Выберите..."
+  },
+  "LoginPage": {
+    "username": "Имя пользователя",
+    "usernamePlaceholder": "Введите имя пользователя",
+    "password": "Пароль",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "Войти",
+    "needSignUp": "Нужен аккаунт? Зарегистрируйтесь",
+    "alreadyHaveAccount": "Уже есть аккаунт? Войдите",
+    "signUp": "Создать аккаунт"
+  },
+  "Onboarding": {
+    "introduction": {
+      "title": "Health Solver",
+      "subtitle": "by OpenHealth",
+      "description": "Есть нерешенные проблемы со здоровьем?\nПозвольте ИИ глубоко проанализировать ваши данные",
+      "privacyNotice": "Ваши собранные данные будут использоваться только для решения ваших проблем со здоровьем.",
+      "runLocally": "Вы можете запустить локально",
+      "here": "здесь"
+    },
+    "healthConcerns": {
+      "title": "Проблемы со Здоровьем",
+      "description": "Пожалуйста, подробно опишите ваши текущие проблемы со здоровьем",
+      "placeholder": "Пример: \n- Какие симптомы вы испытываете?\n- Когда они начались?\n- Что ухудшает симптомы?\n- Были ли у вас похожие симптомы раньше?",
+      "error": "Пожалуйста, опишите ваши проблемы со здоровьем"
+    },
+    "personalInfo": {
+      "title": "Личная Информация",
+      "description": "Помогите нам лучше понять ваш профиль",
+      "gender": {
+        "label": "Пол",
+        "male": "Мужской",
+        "female": "Женский",
+        "error": "Пожалуйста, выберите ваш пол"
+      },
+      "birthDate": {
+        "label": "Дата Рождения",
+        "error": "Пожалуйста, введите вашу дату рождения"
+      },
+      "height": {
+        "label": "Рост",
+        "placeholder": {
+          "cm": "170",
+          "ft": "5.6"
+        },
+        "error": "Пожалуйста, введите ваш рост"
+      },
+      "weight": {
+        "label": "Вес",
+        "placeholder": {
+          "kg": "65",
+          "lb": "143"
+        },
+        "error": "Пожалуйста, введите ваш вес"
+      },
+      "ethnicity": {
+        "label": "Этническая Принадлежность",
+        "placeholder": "Выберите вашу этническую принадлежность",
+        "options": {
+          "east_asian": "Восточноазиатская",
+          "southeast_asian": "Юго-восточноазиатская",
+          "south_asian": "Южноазиатская",
+          "european": "Европейская",
+          "middle_eastern": "Ближний Восток/Северная Африка",
+          "african": "Африканская",
+          "african_american": "Афроамериканская",
+          "pacific_islander": "Житель Тихоокеанских островов",
+          "native_american": "Коренной американец",
+          "hispanic": "Испаноязычная/Латиноамериканская",
+          "mixed": "Смешанная этничность",
+          "other": "Другая"
+        },
+        "error": "Пожалуйста, выберите вашу этническую принадлежность"
+      },
+      "country": {
+        "label": "Страна",
+        "placeholder": "Введите название вашей страны",
+        "error": "Пожалуйста, выберите вашу страну"
+      }
+    },
+    "medicalRecords": {
+      "title": "Медицинские Записи",
+      "description": "Загрузите ваши медицинские записи для лучшего анализа (Необязательно)",
+      "dragDrop": {
+        "title": "Перетащите ваши файлы сюда",
+        "or": "или",
+        "browse": "Выбрать Файлы",
+        "supportedFormats": "Поддерживаемые форматы: PDF, JPEG, PNG, DOC"
+      }
+    },
+    "analysis": {
+      "description": "ИИ анализирует ваши данные о здоровье, чтобы понять ваше состояние\nи предоставить персонализированные рекомендации по здоровью"
+    },
+    "navigation": {
+      "back": "Назад",
+      "next": "Далее",
+      "skip": "Пропустить"
+    },
+    "healthSolver": {
+      "message": "Расскажите мне о своих проблемах со здоровьем"
+    }
+  }
+} 

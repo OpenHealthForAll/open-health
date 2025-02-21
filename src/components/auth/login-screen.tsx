@@ -5,8 +5,10 @@ import {useSearchParams} from 'next/navigation';
 import {AuroraBackground} from '@/components/ui/aurora-background';
 import {motion} from 'framer-motion';
 import {signIn} from "next-auth/react";
+import {useTranslations} from "next-intl";
 
 export default function LoginScreen() {
+    const t = useTranslations('LoginPage')
     const [isLogin, setIsLogin] = useState(true);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -83,7 +85,7 @@ export default function LoginScreen() {
                         <div className="rounded-md shadow-sm space-y-4">
                             <div>
                                 <label htmlFor="username" className="block text-sm font-medium text-zinc-300">
-                                    Username
+                                    {t('username')}
                                 </label>
                                 <input
                                     id="username"
@@ -91,14 +93,14 @@ export default function LoginScreen() {
                                     type="text"
                                     required
                                     className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-zinc-700/50 bg-zinc-800/30 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500"
-                                    placeholder="Enter your username"
+                                    placeholder={t('usernamePlaceholder')}
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                 />
                             </div>
                             <div>
                                 <label htmlFor="password" className="block text-sm font-medium text-zinc-300">
-                                    Password
+                                    {t('password')}
                                 </label>
                                 <input
                                     id="password"
@@ -106,7 +108,7 @@ export default function LoginScreen() {
                                     type="password"
                                     required
                                     className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-zinc-700/50 bg-zinc-800/30 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500"
-                                    placeholder="••••••••"
+                                    placeholder={t('passwordPlaceholder')}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
@@ -118,7 +120,7 @@ export default function LoginScreen() {
                                 type="submit"
                                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-zinc-900 bg-white hover:bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-500 transition-colors duration-200"
                             >
-                                {isLogin ? 'Sign in' : 'Create account'}
+                                {isLogin ? t('signIn') : t('signUp')}
                             </button>
                         </div>
                     </form>
@@ -129,7 +131,7 @@ export default function LoginScreen() {
                             onClick={() => setIsLogin(!isLogin)}
                             className="text-sm text-zinc-400 hover:text-zinc-300 font-medium focus:outline-none"
                         >
-                            {isLogin ? 'Need an account? Sign up' : 'Already have an account? Sign in'}
+                            {isLogin ? t('needSignUp') : t('alreadyHaveAccount')}
                         </button>
                     </div>
                 </motion.div>

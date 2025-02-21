@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**AIヘルスアシスタント | あなたのデータで動作するローカル実行型**
+**AIヘルスアシスタント | あなたのデータで動作**
 
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Web-blue?style=for-the-badge" alt="Platform">
@@ -17,7 +17,7 @@
 ### 🌟 概要
 
 OpenHealthは、**あなたの健康データを管理**するお手伝いをします。AIとあなたの個人健康情報を活用し、
-OpenHealthはプライベートでローカルで実行されるアシスタントを提供し、健康をより良く理解し管理することを支援します。
+OpenHealthはプライベートなアシスタントを提供し、健康をより良く理解し管理することを支援します。最大限のプライバシー保護のため、完全にローカルで実行することができます。
 
 ### ✨ プロジェクトの特徴
 
@@ -64,23 +64,24 @@ OpenHealthはプライベートでローカルで実行されるアシスタン�
    # 環境設定ファイルをコピー
    cp .env.example .env
 
-   # .envファイルにAPIキーを追加:
-   # UPSTAGE_API_KEY - パース用（https://www.upstage.ai でカード登録なしで$10のクレジットが取得可能）
-   # OPENAI_API_KEY - 高度なパース機能のため
-
    # Docker Composeでアプリケーションを起動
    docker compose --env-file .env up
    ```
 
    既存ユーザーの場合:
    ```bash
+   # .envファイルのENCRYPTION_KEYを生成:
+   # 以下のコマンドを実行し、出力を.envのENCRYPTION_KEYに追加してください
+   echo $(head -c 32 /dev/urandom | base64)
+
+   # イメージを再ビルドして起動
    docker compose --env-file .env up --build
    ```
 
 3. **OpenHealthへのアクセス:**
    ブラウザで `http://localhost:3000` にアクセスしてOpenHealthを開始します。
 
-> **注意:** システムはパースとLLMの2つの主要コンポーネントで構成されています。現在、パースはUpstageとOpenAI APIを使用しており（テストで最高のパフォーマンスを示しました）、ローカルパーサーも近日追加予定です。LLMコンポーネントはOllamaを使用して完全にローカルで実行できます。
+> **注意:** システムはパースとLLMの2つの主要コンポーネントで構成されています。パースについては、doclingを使用して完全なローカル実行が可能で、LLMコンポーネントはOllamaを使用して完全にローカルで実行できます。
 
 > **注意:** DockerでOllamaを使用する場合、Ollama APIエンドポイントを次のように設定してください: `http://docker.for.mac.localhost:11434`（Macの場合）または `http://host.docker.internal:11434`（Windowsの場合）
 

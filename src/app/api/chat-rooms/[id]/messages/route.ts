@@ -1,11 +1,11 @@
 import {NextRequest, NextResponse} from "next/server";
 import prisma, {Prisma} from "@/lib/prisma";
-import OpenAI from "openai";
-import Anthropic from "@anthropic-ai/sdk";
-import {GoogleGenerativeAI} from "@google/generative-ai";
 import {auth} from "@/auth";
 import {decrypt} from "@/lib/encryption";
 import {currentDeploymentEnv} from "@/lib/current-deployment-env";
+import {ChatOpenAI} from "@langchain/openai";
+import {ChatAnthropic} from "@langchain/anthropic";
+import {ChatGoogleGenerativeAI} from "@langchain/google-genai";
 
 export interface ChatMessage extends Prisma.ChatMessageGetPayload<{
     select: {
@@ -69,7 +69,7 @@ export async function POST(
         await prisma.chatMessage.create({data: {content: body.content, role: body.role, chatRoomId: id}});
         const {assistantMode} = await prisma.chatRoom.update({
             where: {id},
-            data: {updatedAt: new Date()},
+            data: {lastActivityAt: new Date()},
             select: {assistantMode: {select: {systemPrompt: true}}}
         })
         const chatMessages = await prisma.chatMessage.findMany({
@@ -161,77 +161,49 @@ export async function POST(
                     }
                 } else if (llmProvider.providerId === 'openai') {
                     // OpenAI API call
-                    const openai = new OpenAI({apiKey, baseURL: llmProvider.apiURL});
                     const llmProviderModelId = chatRoom.llmProviderModelId;
                     if (!llmProviderModelId) throw new Error('No LLM model ID provided');
-                    const chatStream = await openai.chat.completions.create({
+                    const openai = new ChatOpenAI({
+                        apiKey,
                         model: llmProviderModelId,
-                        messages: messages,
-                        stream: true
-                    });
+                        configuration: {baseURL: llmProvider.apiURL},
+                        streaming: true,
+                    }).withConfig({metadata: {chatRoomId: id}, runName: 'chat'})
 
+                    const chatStream = await openai.stream(messages)
                     for await (const part of chatStream) {
-                        const deltaContent = part.choices[0]?.delta.content
+                        const deltaContent = part.content.toString()
                         if (deltaContent !== undefined) messageContent += deltaContent;
                         controller.enqueue(`${JSON.stringify({content: messageContent})}\n`);
                     }
                 } else if (llmProvider.providerId === 'anthropic') {
-                    const anthropic = new Anthropic({apiKey, baseURL: llmProvider.apiURL});
                     const llmProviderModelId = chatRoom.llmProviderModelId;
                     if (!llmProviderModelId) throw new Error('No LLM model ID provided');
-                    messageContent = await new Promise((resolve, reject) => {
-                        let messageContent = '';
-                        anthropic.messages.stream({
-                            model: llmProviderModelId,
-                            messages: messages
-                                .filter(message => message.content)
-                                .filter((message) => message.role !== 'system'),
-                            system: messages
-                                .filter(message => message.content)
-                                .filter((message) => message.role === 'system').join('\n'),
-                            max_tokens: 4096,
-                            stream: true,
-                        })
-                            .on('text', (text) => {
-                                if (text !== undefined) messageContent += text;
-                                controller.enqueue(`${JSON.stringify({content: messageContent})}\n`);
-                            })
-                            .on('end', () => {
-                                resolve(messageContent);
-                            })
-                            .on('error', (error) => {
-                                reject(error);
-                            });
-                    })
+                    const anthropic = new ChatAnthropic({
+                        apiKey,
+                        anthropicApiUrl: llmProvider.apiURL,
+                        model: llmProviderModelId,
+                        maxTokens: 4096,
+                    }).withConfig({metadata: {chatRoomId: id}, runName: 'chat'})
+
+                    const chatStream = await anthropic.stream(messages)
+                    for await (const part of chatStream) {
+                        const deltaContent = part.content.toString()
+                        if (deltaContent !== undefined) messageContent += deltaContent;
+                        controller.enqueue(`${JSON.stringify({content: messageContent})}\n`);
+                    }
                 } else if (llmProvider.providerId == 'google') {
-                    const gemini = new GoogleGenerativeAI(apiKey)
                     const llmProviderModelId = chatRoom.llmProviderModelId;
                     if (!llmProviderModelId) throw new Error('No LLM model ID provided');
-                    const model = gemini.getGenerativeModel({model: llmProviderModelId})
+                    const gemini = new ChatGoogleGenerativeAI({
+                        apiKey,
+                        model: llmProviderModelId
+                    }).withConfig({metadata: {chatRoomId: id}, runName: 'chat'})
 
-                    const lastMessage = messages[messages.length - 1]
-                    const history = messages.filter(message => message.role !== 'system').slice(0, -1)
-                    const systemInstruction = messages.find(message => message.role === 'system')
-
-                    const chat = model.startChat({
-                        systemInstruction: systemInstruction ? {
-                            role: 'system',
-                            parts: [{text: systemInstruction.content}]
-                        } : undefined,
-                        history: history.map(message => ({
-                            role: message.role === 'assistant' ? 'model' : message.role,
-                            parts: [{text: message.content}]
-                        })),
-                    })
-
-                    const result = await chat.sendMessageStream(lastMessage.content)
-                    for await (const chunk of result.stream) {
-                        if (chunk.candidates) {
-                            const candidates = chunk.candidates[0]
-                            messageContent += candidates.content.parts.map(part => part.text).join('')
-                        } else {
-                            messageContent += chunk.text
-                        }
+                    const chatStream = await gemini.stream(messages)
+                    for await (const part of chatStream) {
+                        const deltaContent = part.content.toString()
+                        if (deltaContent !== undefined) messageContent += deltaContent;
                         controller.enqueue(`${JSON.stringify({content: messageContent})}\n`);
                     }
                 } else {
@@ -248,7 +220,7 @@ export async function POST(
                         }
                     });
                     await prisma.chatRoom.update({
-                        where: {id}, data: {updatedAt: new Date(), name: messageContent}
+                        where: {id}, data: {lastActivityAt: new Date(), name: messageContent}
                     })
                 });
             } catch (error) {

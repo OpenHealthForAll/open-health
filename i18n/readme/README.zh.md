@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**AI健康助手 | 由您的数据驱动，本地运行**
+**AI健康助手 | 由您的数据驱动**
 
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Web-blue?style=for-the-badge" alt="Platform">
@@ -17,7 +17,7 @@
 ### 🌟 概述
 
 OpenHealth帮助您**掌控健康数据**。通过利用AI和您的个人健康信息，
-OpenHealth提供私密且本地运行的助手，帮助您更好地理解和管理健康。
+OpenHealth提供私密的助手，帮助您更好地理解和管理健康。为了最大程度地保护隐私，您可以完全在本地运行。
 
 ---
 
@@ -72,23 +72,24 @@ OpenHealth提供私密且本地运行的助手，帮助您更好地理解和管�
    # 复制环境文件
    cp .env.example .env
 
-   # 在.env文件中添加API密钥：
-   # UPSTAGE_API_KEY - 用于解析（在 https://www.upstage.ai 注册即可获得$10免费额度，无需绑定信用卡）
-   # OPENAI_API_KEY - 用于增强解析功能
-
    # 使用Docker Compose启动应用
    docker compose --env-file .env up
    ```
 
    对于现有用户：
    ```bash
+   # 生成 .env 文件的 ENCRYPTION_KEY：
+   # 运行以下命令并将输出添加到 .env 的 ENCRYPTION_KEY
+   echo $(head -c 32 /dev/urandom | base64)
+
+   # 重新构建并启动应用
    docker compose --env-file .env up --build
    ```
 
 3. **访问OpenHealth：**
    打开浏览器并访问 `http://localhost:3000` 开始使用OpenHealth。
 
-> **注意：** 系统由解析和LLM两个主要组件组成。目前，解析使用Upstage和OpenAI API（在我们的测试中表现最佳），本地解析器即将推出。LLM组件可以使用Ollama在本地完全运行。
+> **注意：** 系统由解析和LLM两个主要组件组成。对于解析，您可以使用docling进行完全本地执行，而LLM组件可以使用Ollama在本地完全运行。
 
 > **注意：** 如果您使用Docker运行Ollama，请确保将Ollama API端点设置为：`http://docker.for.mac.localhost:11434`（Mac用户）或 `http://host.docker.internal:11434`（Windows用户）
 

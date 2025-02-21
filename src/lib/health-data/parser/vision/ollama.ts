@@ -52,6 +52,9 @@ export class OllamaVisionParser extends BaseVisionParser {
         const messages = options.messages || ChatPromptTemplate.fromMessages([]);
         const chain = messages.pipe(llm.withStructuredOutput(HealthCheckupSchema, {
             method: 'functionCalling',
+        }).withConfig({
+            runName: 'health-data-parser',
+            metadata: {input: options.input}
         }))
         return await chain.withRetry({stopAfterAttempt: 3}).invoke(options.input);
     }

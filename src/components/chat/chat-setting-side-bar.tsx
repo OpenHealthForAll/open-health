@@ -12,6 +12,7 @@ import {LLMProvider, LLMProviderListResponse} from "@/app/api/llm-providers/rout
 import {LLMProviderModel, LLMProviderModelListResponse} from "@/app/api/llm-providers/[id]/models/route";
 import {cn} from "@/lib/utils";
 import {ConditionalDeploymentEnv} from "@/components/common/deployment-env";
+import {useTranslations} from "next-intl";
 
 interface ChatSettingSideBarProps {
     isRightSidebarOpen: boolean;
@@ -20,6 +21,8 @@ interface ChatSettingSideBarProps {
 
 export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: ChatSettingSideBarProps
 ) {
+    const t = useTranslations('ChatSettingSideBar')
+
     const [selectedAssistantMode, setSelectedAssistantMode] = useState<AssistantMode>();
     const [selectedLLMProvider, setSelectedLLMProvider] = useState<LLMProvider>();
     const [selectedLLMProviderModel, setSelectedLLMProviderModel] = useState<LLMProviderModel>();
@@ -179,7 +182,7 @@ export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Cha
             transition-opacity duration-300 overflow-y-auto`}>
             <div className="p-4 space-y-4">
                 <div className="space-y-4">
-                    <h4 className="text-sm font-medium">Model Settings</h4>
+                    <h4 className="text-sm font-medium">{t('modelSettings')}</h4>
                     <div className="space-y-2">
                         <Select value={selectedLLMProvider?.id}
                                 onValueChange={(value) => {
@@ -189,7 +192,7 @@ export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Cha
                                     onChangeChatRoom({llmProviderId: value, llmProviderModelId: null});
                                 }}>
                             <SelectTrigger>
-                                <SelectValue placeholder="Select company"/>
+                                <SelectValue placeholder={t('selectCompany')}/>
                             </SelectTrigger>
                             <SelectContent className={cn('bg-white')}>
                                 {llmProvidersData?.llmProviders.map((provider) => <SelectItem
@@ -200,7 +203,7 @@ export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Cha
                         <Select value={selectedLLMProviderModel?.id}
                                 onValueChange={(value) => setSelectedLLMProviderModel(llmProviderModels.find((model) => model.id === value))}>
                             <SelectTrigger>
-                                <SelectValue placeholder="Select model"/>
+                                <SelectValue placeholder={t('selectModel')}/>
                             </SelectTrigger>
                             <SelectContent className={cn('bg-white')}>
                                 {llmProviderModels.map((model) => (
@@ -210,7 +213,7 @@ export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Cha
                                 ))}
 
                                 {llmProviderModels.length === 0 && (
-                                    <div className="p-2 text-sm text-gray-500">No models found</div>
+                                    <div className="p-2 text-sm text-gray-500">{t('noModelsFound')}</div>
                                 )}
                             </SelectContent>
                         </Select>
@@ -228,7 +231,7 @@ export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Cha
                                 <div className="relative">
                                     <Input
                                         type={showApiKey ? "text" : "password"}
-                                        placeholder="Enter API key"
+                                        placeholder={t('enterApiKey')}
                                         value={selectedLLMProvider?.apiKey || ''}
                                         onChange={(e) => onLLMProviderChange({apiKey: e.target.value})}
                                         className="pr-16"
@@ -237,7 +240,7 @@ export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Cha
                                         className="absolute right-2 top-1/2 -translate-y-1/2 px-2 py-1 text-sm text-gray-500 hover:text-gray-700"
                                         onClick={() => setShowApiKey(!showApiKey)}
                                     >
-                                        {showApiKey ? "Hide" : "Show"}
+                                        {showApiKey ? t('hide') : t('show')}
                                     </button>
                                 </div>
                             )}
@@ -246,7 +249,7 @@ export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Cha
                 </div>
 
                 <div className="space-y-2">
-                    <label className="text-sm font-medium">System Prompt</label>
+                    <label className="text-sm font-medium">{t('systemPrompt')}</label>
                     <Textarea
                         value={selectedAssistantMode?.systemPrompt || ''}
                         onChange={async (e) => {
@@ -261,7 +264,7 @@ export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Cha
                 </div>
 
                 <div className="space-y-3">
-                    <h4 className="text-sm font-medium">Assistant Mode</h4>
+                    <h4 className="text-sm font-medium">{t('assistantMode')}</h4>
                     <div className="space-y-2">
                         {assistantModes.map((assistantMode) => (
                             <button

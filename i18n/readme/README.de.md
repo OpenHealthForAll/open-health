@@ -1,6 +1,6 @@
 # 🚀 **OpenHealth**
 
-**KI-Gesundheitsassistent | Angetrieben von Ihren Daten, Lokal Ausgeführt**
+**KI-Gesundheitsassistent | Angetrieben von Ihren Daten**
 
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Web-blue?style=for-the-badge" alt="Platform">
@@ -30,7 +30,7 @@
 ## 🌟 Überblick
 
 > OpenHealth hilft Ihnen, **die Kontrolle über Ihre Gesundheitsdaten zu übernehmen**. Durch den Einsatz von KI und Ihren persönlichen Gesundheitsinformationen
-> bietet OpenHealth einen privaten und lokal ausgeführten Assistenten, der Ihnen hilft, Ihre Gesundheit besser zu verstehen und zu verwalten.
+> bietet OpenHealth einen privaten Assistenten, der Ihnen hilft, Ihre Gesundheit besser zu verstehen und zu verwalten. Für maximale Privatsphäre können Sie es vollständig lokal ausführen.
 
 ## ✨ Projektfunktionen
 
@@ -109,23 +109,24 @@ Gesundheitsdaten-Eingabe --> Parsing-Modul --> Strukturierte Datendateien --> GP
    # Umgebungsdatei kopieren
    cp .env.example .env
 
-   # API-Schlüssel zur .env-Datei hinzufügen:
-   # UPSTAGE_API_KEY - Für das Parsing (Erhalten Sie $10 Guthaben ohne Kartenregistrierung bei https://www.upstage.ai)
-   # OPENAI_API_KEY - Für erweiterte Parsing-Funktionen
-
    # Anwendung mit Docker Compose starten
    docker compose --env-file .env up
    ```
 
    Für bestehende Benutzer:
    ```bash
+   # ENCRYPTION_KEY für die .env-Datei generieren:
+   # Führen Sie den folgenden Befehl aus und fügen Sie die Ausgabe zu ENCRYPTION_KEY in .env hinzu
+   echo $(head -c 32 /dev/urandom | base64)
+
+   # Bild neu erstellen und starten
    docker compose --env-file .env up --build
    ```
 
 3. **Zugriff auf OpenHealth:**
    Öffnen Sie Ihren Browser und navigieren Sie zu `http://localhost:3000`, um OpenHealth zu nutzen.
 
-> **Hinweis:** Das System besteht aus zwei Hauptkomponenten: Parsing und LLM. Derzeit verwendet das Parsing Upstage- und OpenAI-APIs (die in unseren Tests die beste Leistung zeigten), wobei ein lokaler Parser in Kürze hinzugefügt wird. Die LLM-Komponente kann mit Ollama vollständig lokal ausgeführt werden.
+> **Hinweis:** Das System besteht aus zwei Hauptkomponenten: Parsing und LLM. Für das Parsing können Sie docling für eine vollständig lokale Ausführung verwenden, während die LLM-Komponente mit Ollama vollständig lokal ausgeführt werden kann.
 
 > **Hinweis:** Wenn Sie Ollama mit Docker verwenden, stellen Sie sicher, dass der Ollama-API-Endpunkt auf `http://docker.for.mac.localhost:11434` für Mac oder `http://host.docker.internal:11434` für Windows eingestellt ist.
 

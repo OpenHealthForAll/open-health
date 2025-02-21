@@ -1,0 +1,179 @@
+{
+  "HomePage": {
+  },
+  "Chat": {
+    "inputPlaceholder": "Escribe tu mensaje..."
+  },
+  "Feedback": {
+    "helpMessage": "Ayuda a OpenHealth a resolver problemas de salud para ti y muchas otras personas",
+    "shareFeedback": "Compartir opinión"
+  },
+  "ChatSideBar": {
+    "sources": "Fuentes",
+    "numberOfFiles": "{value, number} archivos",
+    "countOfTokens": "{value, number} tokens",
+    "viewAggregatedSources": "Ver fuentes agregadas",
+    "aggregatedSources": "Fuentes agregadas",
+    "manageSources": "Gestionar fuentes",
+    "newChat": "Nueva conversación",
+    "copy": "Copiar",
+    "download": "Descargar",
+    "chatDeleteTitle": "Eliminar conversación",
+    "chatDeleteMessage": "¿Estás seguro de que quieres eliminar esta conversación?",
+    "chatDeleteMessageDetail": "Esta acción no se puede deshacer.",
+    "cancel": "Cancelar",
+    "delete": "Eliminar"
+  },
+  "ChatSettingSideBar": {
+    "modelSettings": "Configuración del modelo",
+    "systemPrompt": "Prompt del sistema",
+    "assistantMode": "Modo asistente",
+    "selectModel": "Seleccionar modelo",
+    "selectCompany": "Seleccionar empresa",
+    "noModelsFound": "No se encontraron modelos.",
+    "enterApiKey": "Ingresar clave API",
+    "show": "Mostrar",
+    "hide": "Ocultar"
+  },
+  "SourceManagement": {
+    "title": "Gestión de fuentes",
+    "addSource": "Agregar fuente",
+    "addNewSource": "Agregar nueva fuente",
+    "personalInfo": "Información personal",
+    "parsingSettings": "Configuración de análisis",
+    "parsingSettingsDescription": "Los modelos Vision y OCR se utilizan juntos para mejorar el rendimiento del análisis.",
+    "visionModel": "Modelo Vision",
+    "visionModelDescription": "Solo se pueden usar modelos con capacidades de visión.",
+    "documentModel": "Modelo de documento",
+    "documentModelDescription": "Docling es un modelo de análisis de código abierto que se ejecuta localmente.",
+    "documentModelDoclingGithub": "Github",
+    "documentModelUpstage": "Upstage",
+    "documentModelUpstageDescription": "Upstage mostró el mejor rendimiento en nuestras pruebas.",
+    "documentModelUpstageDescription2": "ofrece $10 de crédito gratis para nuevos registros, sin tarjeta requerida.",
+    "name": "Nombre",
+    "birthdate": "Fecha de nacimiento",
+    "height": "Altura",
+    "weight": "Peso",
+    "bloodType": "Tipo de sangre",
+    "familyHistory": "Historia familiar",
+    "select": "Seleccionar",
+    "extractedData": "Datos extraídos",
+    "update": "Actualizar",
+    "uploadFiles": "Subir archivos",
+    "uploadFilesDescription": "Agregar imágenes o archivos PDF.",
+    "uploadSymptoms": "Nuevos síntomas",
+    "uploadSymptomsDescription": "Registrar los síntomas de hoy.",
+    "date": "Fecha",
+    "endDate": "Fecha final",
+    "description": "Descripción",
+    "symptoms": "Síntomas",
+    "selectModel": "Seleccionar modelo",
+    "apiKey": "Clave API",
+    "enterYourAPIKey": "Ingresa tu clave API",
+    "enterYourAPIUrl": "Ingresa tu URL API"
+  },
+  "DynamicForm": {
+    "selectPlaceholder": "Seleccionar..."
+  },
+  "LoginPage": {
+    "username": "Nombre de usuario",
+    "usernamePlaceholder": "Ingresa tu nombre de usuario",
+    "password": "Contraseña",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "Iniciar sesión",
+    "needSignUp": "¿Necesitas una cuenta? Regístrate",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta? Inicia sesión",
+    "signUp": "Crear cuenta"
+  },
+  "Onboarding": {
+    "introduction": {
+      "title": "Health Solver",
+      "subtitle": "by OpenHealth",
+      "description": "¿Tienes problemas de salud sin resolver?\nDeja que la IA analice tus datos en profundidad",
+      "privacyNotice": "Tus datos recopilados solo se utilizarán para resolver tus problemas de salud.",
+      "runLocally": "Puedes ejecutarlo localmente",
+      "here": "aquí"
+    },
+    "healthConcerns": {
+      "title": "Problemas de Salud",
+      "description": "Por favor, describe tus problemas de salud actuales en detalle",
+      "placeholder": "Ejemplo: \n- ¿Qué síntomas estás experimentando?\n- ¿Cuándo comenzaron?\n- ¿Qué empeora los síntomas?\n- ¿Has experimentado síntomas similares antes?",
+      "error": "Por favor, describe tus problemas de salud"
+    },
+    "personalInfo": {
+      "title": "Información Personal",
+      "description": "Ayúdanos a entender mejor tu perfil",
+      "gender": {
+        "label": "Género",
+        "male": "Masculino",
+        "female": "Femenino",
+        "error": "Por favor, selecciona tu género"
+      },
+      "birthDate": {
+        "label": "Fecha de Nacimiento",
+        "error": "Por favor, ingresa tu fecha de nacimiento"
+      },
+      "height": {
+        "label": "Altura",
+        "placeholder": {
+          "cm": "170",
+          "ft": "5.6"
+        },
+        "error": "Por favor, ingresa tu altura"
+      },
+      "weight": {
+        "label": "Peso",
+        "placeholder": {
+          "kg": "65",
+          "lb": "143"
+        },
+        "error": "Por favor, ingresa tu peso"
+      },
+      "ethnicity": {
+        "label": "Etnia",
+        "placeholder": "Selecciona tu etnia",
+        "options": {
+          "east_asian": "Asiático del Este",
+          "southeast_asian": "Asiático del Sureste",
+          "south_asian": "Asiático del Sur",
+          "european": "Europeo",
+          "middle_eastern": "Medio Oriente/Norte de África",
+          "african": "Africano",
+          "african_american": "Afroamericano",
+          "pacific_islander": "Isleño del Pacífico",
+          "native_american": "Nativo Americano/Indígena",
+          "hispanic": "Hispano/Latino",
+          "mixed": "Etnia Mixta",
+          "other": "Otro"
+        },
+        "error": "Por favor, selecciona tu etnia"
+      },
+      "country": {
+        "label": "País",
+        "placeholder": "Escribe el nombre de tu país",
+        "error": "Por favor, selecciona tu país"
+      }
+    },
+    "medicalRecords": {
+      "title": "Registros Médicos",
+      "description": "Sube tus registros médicos para un mejor análisis (Opcional)",
+      "dragDrop": {
+        "title": "Arrastra y suelta tus archivos aquí",
+        "or": "o",
+        "browse": "Buscar Archivos",
+        "supportedFormats": "Formatos soportados: PDF, JPEG, PNG, DOC"
+      }
+    },
+    "analysis": {
+      "description": "La IA está analizando tus datos de salud para entender tu condición\ny proporcionar información personalizada sobre tu salud"
+    },
+    "navigation": {
+      "back": "Atrás",
+      "next": "Siguiente",
+      "skip": "Omitir"
+    },
+    "healthSolver": {
+      "message": "Hábleme de sus problemas de salud"
+    }
+  }
+} 

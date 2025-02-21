@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**AI 건강 도우미 | 당신의 데이터로 구동되는 로컬 실행 방식**
+**AI 건강 도우미 | 당신의 데이터로 구동**
 
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Web-blue?style=for-the-badge" alt="Platform">
@@ -17,7 +17,7 @@
 ### 🌟 개요
 
 OpenHealth는 **당신의 건강 데이터를 관리**하도록 도와줍니다. AI와 개인 건강 정보를 활용하여,
-OpenHealth는 건강을 더 잘 이해하고 관리할 수 있도록 도와주는 프라이빗하고 로컬에서 실행되는 도우미를 제공합니다.
+OpenHealth는 건강을 더 잘 이해하고 관리할 수 있도록 도와주는 프라이빗한 도우미를 제공합니다. 최대한의 개인정보 보호를 위해 완전히 로컬에서 실행할 수 있습니다.
 
 ---
 
@@ -72,23 +72,24 @@ OpenHealth는 건강을 더 잘 이해하고 관리할 수 있도록 도와주�
    # 환경 설정 파일 복사
    cp .env.example .env
 
-   # .env 파일에 API 키 추가:
-   # UPSTAGE_API_KEY - 파싱용 (https://www.upstage.ai 에서 회원가입 시 카드등록 없이 $10 크레딧을 받을 수 있습니다)
-   # OPENAI_API_KEY - 향상된 파싱 기능을 위해 필요
-
    # Docker Compose로 애플리케이션 시작
    docker compose --env-file .env up
    ```
 
    기존 사용자의 경우:
    ```bash
+   # .env 파일의 ENCRYPTION_KEY 생성:
+   # 아래 명령어를 실행하고 출력값을 .env의 ENCRYPTION_KEY에 추가하세요
+   echo $(head -c 32 /dev/urandom | base64)
+
+   # 이미지 재빌드 및 시작
    docker compose --env-file .env up --build
    ```
 
 3. **OpenHealth 접속:**
    브라우저에서 `http://localhost:3000`에 접속하여 OpenHealth를 시작하세요.
 
-> **참고:** 시스템은 파싱과 LLM 두 가지 주요 구성 요소로 이루어져 있습니다. 현재 파싱은 Upstage와 OpenAI API를 사용하고 있으며(테스트 결과 가장 좋은 성능을 보였습니다), 곧 로컬 파서가 추가될 예정입니다. LLM 구성 요소는 Ollama를 사용하여 완전히 로컬에서 실행할 수 있습니다.
+> **참고:** 시스템은 파싱과 LLM 두 가지 주요 구성 요소로 이루어져 있습니다. 파싱의 경우 [DOCLING](https://github.com/DS4SD/docling)을 사용하여 완전한 로컬 실행이 가능하며, LLM 구성 요소는 Ollama를 사용하여 완전히 로컬에서 실행할 수 있습니다.
 
 > **참고:** Docker에서 Ollama를 사용하는 경우, Ollama API 엔드포인트를 다음과 같이 설정하세요: `http://docker.for.mac.localhost:11434` (Mac의 경우) 또는 `http://host.docker.internal:11434` (Windows의 경우)
 

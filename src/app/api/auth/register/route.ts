@@ -18,7 +18,13 @@ export async function POST(request: Request) {
         await prisma.$transaction(async (prisma) => {
 
             // Create a new user
-            const user = await prisma.user.create({data: {username, password: hashedPassword}})
+            const user = await prisma.user.create({
+                data: {
+                    username,
+                    password: hashedPassword,
+                    hasOnboarded: false,
+                }
+            })
 
             // Create a assistant mode
             await prisma.assistantMode.createMany({

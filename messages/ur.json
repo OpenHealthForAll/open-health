@@ -1,0 +1,179 @@
+{
+  "HomePage": {
+  },
+  "Chat": {
+    "inputPlaceholder": "اپنا پیغام لکھیں..."
+  },
+  "Feedback": {
+    "helpMessage": "اوپن ہیلتھ کی مدد کریں آپ اور دوسرے لوگوں کے صحت کے مسائل حل کرنے میں",
+    "shareFeedback": "رائے دیں"
+  },
+  "ChatSideBar": {
+    "sources": "ذرائع",
+    "numberOfFiles": "{value, number} فائلیں",
+    "countOfTokens": "{value, number} ٹوکنز",
+    "viewAggregatedSources": "مجموعی ذرائع دیکھیں",
+    "aggregatedSources": "مجموعی ذرائع",
+    "manageSources": "ذرائع کا انتظام",
+    "newChat": "نئی چیٹ",
+    "copy": "کاپی",
+    "download": "ڈاؤن لوڈ",
+    "chatDeleteTitle": "چیٹ حذف کریں",
+    "chatDeleteMessage": "کیا آپ واقعی اس چیٹ کو حذف کرنا چاہتے ہیں؟",
+    "chatDeleteMessageDetail": "یہ عمل واپس نہیں کیا جا سکتا۔",
+    "cancel": "منسوخ",
+    "delete": "حذف کریں"
+  },
+  "ChatSettingSideBar": {
+    "modelSettings": "ماڈل کی ترتیبات",
+    "systemPrompt": "سسٹم پرامپٹ",
+    "assistantMode": "اسسٹنٹ موڈ",
+    "selectModel": "ماڈل منتخب کریں",
+    "selectCompany": "کمپنی منتخب کریں",
+    "noModelsFound": "کوئی ماڈل نہیں ملا۔",
+    "enterApiKey": "API کلید درج کریں",
+    "show": "دکھائیں",
+    "hide": "چھپائیں"
+  },
+  "SourceManagement": {
+    "title": "ذرائع کا انتظام",
+    "addSource": "ذریعہ شامل کریں",
+    "addNewSource": "نیا ذریعہ شامل کریں",
+    "personalInfo": "ذاتی معلومات",
+    "parsingSettings": "پارسنگ کی ترتیبات",
+    "parsingSettingsDescription": "پارسنگ کی کارکردگی کو بہتر بنانے کے لیے Vision اور OCR ماڈلز ایک ساتھ استعمال کیے جاتے ہیں۔",
+    "visionModel": "Vision ماڈل",
+    "visionModelDescription": "صرف ویژن صلاحیتوں والے ماڈلز استعمال کیے جا سکتے ہیں۔",
+    "documentModel": "دستاویز ماڈل",
+    "documentModelDescription": "Docling ایک اوپن سورس پارسنگ ماڈل ہے جو مقامی طور پر چلتا ہے۔",
+    "documentModelDoclingGithub": "Github",
+    "documentModelUpstage": "Upstage",
+    "documentModelUpstageDescription": "Upstage نے ہمارے ٹیسٹوں میں بہترین کارکردگی دکھائی۔",
+    "documentModelUpstageDescription2": "نئی سائن اپ کے لیے $10 مفت کریڈٹ، کارڈ کی ضرورت نہیں۔",
+    "name": "نام",
+    "birthdate": "تاریخ پیدائش",
+    "height": "قد",
+    "weight": "وزن",
+    "bloodType": "خون کی قسم",
+    "familyHistory": "خاندانی تاریخ",
+    "select": "منتخب کریں",
+    "extractedData": "نکالا گیا ڈیٹا",
+    "update": "اپ ڈیٹ",
+    "uploadFiles": "فائلیں اپ لوڈ کریں",
+    "uploadFilesDescription": "تصاویر یا PDF فائلیں شامل کریں۔",
+    "uploadSymptoms": "نئی علامات",
+    "uploadSymptomsDescription": "آج کی علامات ریکارڈ کریں۔",
+    "date": "تاریخ",
+    "endDate": "آخری تاریخ",
+    "description": "تفصیل",
+    "symptoms": "علامات",
+    "selectModel": "ماڈل منتخب کریں",
+    "apiKey": "API کلید",
+    "enterYourAPIKey": "اپنی API کلید درج کریں",
+    "enterYourAPIUrl": "اپنی API URL درج کریں"
+  },
+  "DynamicForm": {
+    "selectPlaceholder": "منتخب کریں..."
+  },
+  "LoginPage": {
+    "username": "صارف نام",
+    "usernamePlaceholder": "اپنا صارف نام درج کریں",
+    "password": "پاس ورڈ",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "سائن ان",
+    "needSignUp": "اکاؤنٹ کی ضرورت ہے؟ سائن اپ کریں",
+    "alreadyHaveAccount": "پہلے سے اکاؤنٹ ہے؟ سائن ان کریں",
+    "signUp": "اکاؤنٹ بنائیں"
+  },
+  "Onboarding": {
+    "introduction": {
+      "title": "Health Solver",
+      "subtitle": "by OpenHealth",
+      "description": "حل نہ ہونے والے صحت کے مسائل ہیں؟\nAI کو آپ کے ڈیٹا کی گہری تجزیہ کرنے دیں",
+      "privacyNotice": "آپ کا جمع کردہ ڈیٹا صرف آپ کے صحت کے مسائل کو حل کرنے کے لیے استعمال کیا جائے گا۔",
+      "runLocally": "آپ اسے مقامی طور پر چلا سکتے ہیں",
+      "here": "یہاں"
+    },
+    "healthConcerns": {
+      "title": "صحت کے مسائل",
+      "description": "براہ کرم اپنے موجودہ صحت کے مسائل کی تفصیل سے وضاحت کریں",
+      "placeholder": "مثال: \n- آپ کو کون سی علامات ہیں؟\n- یہ کب شروع ہوئیں؟\n- کیا چیز علامات کو بدتر کرتی ہے؟\n- کیا آپ کو پہلے بھی ایسی علامات کا تجربہ ہوا ہے؟",
+      "error": "براہ کرم اپنے صحت کے مسائل بیان کریں"
+    },
+    "personalInfo": {
+      "title": "ذاتی معلومات",
+      "description": "ہمیں آپ کی پروفائل کو بہتر طور پر سمجھنے میں مدد کریں",
+      "gender": {
+        "label": "جنس",
+        "male": "مرد",
+        "female": "عورت",
+        "error": "براہ کرم اپنی جنس منتخب کریں"
+      },
+      "birthDate": {
+        "label": "تاریخ پیدائش",
+        "error": "براہ کرم اپنی تاریخ پیدائش درج کریں"
+      },
+      "height": {
+        "label": "قد",
+        "placeholder": {
+          "cm": "170",
+          "ft": "5.6"
+        },
+        "error": "براہ کرم اپنا قد درج کریں"
+      },
+      "weight": {
+        "label": "وزن",
+        "placeholder": {
+          "kg": "65",
+          "lb": "143"
+        },
+        "error": "براہ کرم اپنا وزن درج کریں"
+      },
+      "ethnicity": {
+        "label": "نسلی تعلق",
+        "placeholder": "اپنا نسلی تعلق منتخب کریں",
+        "options": {
+          "east_asian": "مشرقی ایشیائی",
+          "southeast_asian": "جنوب مشرقی ایشیائی",
+          "south_asian": "جنوبی ایشیائی",
+          "european": "یورپی",
+          "middle_eastern": "مشرق وسطی/شمالی افریقی",
+          "african": "افریقی",
+          "african_american": "افریقی امریکی",
+          "pacific_islander": "بحر الکاہل کے جزائر کے باشندے",
+          "native_american": "مقامی امریکی/آبائی",
+          "hispanic": "ہسپانوی/لاطینی",
+          "mixed": "مخلوط نسل",
+          "other": "دیگر"
+        },
+        "error": "براہ کرم اپنا نسلی تعلق منتخب کریں"
+      },
+      "country": {
+        "label": "ملک",
+        "placeholder": "اپنے ملک کا نام درج کریں",
+        "error": "براہ کرم اپنا ملک منتخب کریں"
+      }
+    },
+    "medicalRecords": {
+      "title": "طبی ریکارڈز",
+      "description": "بہتر تجزیہ کے لیے اپنے طبی ریکارڈز اپ لوڈ کریں (اختیاری)",
+      "dragDrop": {
+        "title": "اپنی فائلیں یہاں کھینچ کر چھوڑیں",
+        "or": "یا",
+        "browse": "فائلیں براؤز کریں",
+        "supportedFormats": "معاون فارمیٹس: PDF، JPEG، PNG، DOC"
+      }
+    },
+    "analysis": {
+      "description": "AI آپ کے صحت کے ڈیٹا کا تجزیہ کر رہا ہے تاکہ آپ کی حالت کو سمجھ سکے\nاور ذاتی نوعیت کی صحت کی بصیرت فراہم کر سکے"
+    },
+    "navigation": {
+      "back": "واپس",
+      "next": "اگلا",
+      "skip": "چھوڑیں"
+    },
+    "healthSolver": {
+      "message": "براہِ کرم میری صحت کے مسئلے کی وضاحت کریں۔"
+    }
+  }
+} 

@@ -38,8 +38,10 @@ export async function GET(
         for await (const models of modelsPage.iterPages()) {
             const modelList = models.data;
             results.push(...modelList.filter((model) => {
-                return !(currentDeploymentEnv === 'cloud' && model.id.startsWith('ft:'));
-
+                if (currentDeploymentEnv === 'cloud') {
+                    return ['gpt-4o', 'o3-mini'].includes(model.id);
+                }
+                return !model.id.startsWith('ft:');
             }).map(model => ({id: model.id, name: model.id})))
         }
         return NextResponse.json<LLMProviderModelListResponse>({
@@ -52,7 +54,12 @@ export async function GET(
         const modelsPage = await anthropic.models.list();
         for await (const models of modelsPage.iterPages()) {
             const modelList = models.data;
-            results.push(...modelList.map(
+            results.push(...modelList.filter((model) => {
+                if (currentDeploymentEnv === 'cloud') {
+                    return model.id.startsWith('claude-3-5');
+                }
+                return true;
+            }).map(
                 model => ({id: model.id, name: model.id})
             ))
         }
@@ -67,7 +74,12 @@ export async function GET(
         const response = await fetch(url.toString())
         const {models} = await response.json()
         return NextResponse.json<LLMProviderModelListResponse>({
-            llmProviderModels: models.map(
+            llmProviderModels: models.filter(({displayName}: { displayName: string }) => {
+                if (currentDeploymentEnv === 'cloud') {
+                    return displayName === 'Gemini 2.0 Flash';
+                }
+                return true;
+            }).map(
                 ({name, displayName}: { name: string, displayName: string }) => ({
                     id: name,
                     name: displayName

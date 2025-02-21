@@ -8,12 +8,13 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  name      String?
-  username  String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String   @id @default(cuid())
+  name         String?
+  username     String   @unique
+  password     String
+  hasOnboarded Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   chatRooms      ChatRoom[]
   healthDataList HealthData[]
@@ -43,6 +44,7 @@ model ChatRoom {
   llmProviderId      String
   llmProviderModelId String?
   authorId           String?
+  lastActivityAt     DateTime @default(now())
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 

@@ -10,7 +10,7 @@ export interface ChatRoom extends Prisma.ChatRoomGetPayload<{
         llmProviderId: true,
         llmProviderModelId: true,
         createdAt: true,
-        updatedAt: true
+        lastActivityAt: true,
     }
 }> {
     id: string
@@ -45,10 +45,10 @@ export async function GET() {
                 }
             },
             createdAt: true,
-            updatedAt: true
+            lastActivityAt: true,
         },
         where: {authorId: session.user.id},
-        orderBy: {updatedAt: 'desc'},
+        orderBy: {lastActivityAt: 'desc'},
     })
     return NextResponse.json<ChatRoomListResponse>({
         chatRooms
@@ -101,7 +101,7 @@ export async function POST() {
                 }
             },
             createdAt: true,
-            updatedAt: true
+            lastActivityAt: true
         }
     })
     return NextResponse.json<ChatRoomCreateResponse>(chatRoom);

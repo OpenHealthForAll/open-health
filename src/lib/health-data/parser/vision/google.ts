@@ -45,7 +45,13 @@ export class GoogleVisionParser extends BaseVisionParser {
             date: HealthCheckupSchema.shape.date,
             name: HealthCheckupSchema.shape.name
         }));
-        const {date, name} = await messages.pipe(llm.withStructuredOutput(DateNameSchema, {method: 'functionCalling'}))
+        const {
+            date,
+            name
+        } = await messages.pipe(llm.withStructuredOutput(DateNameSchema, {method: 'functionCalling'}).withConfig({
+            runName: 'health-data-parser',
+            metadata: {input: options.input}
+        }))
             .withRetry({stopAfterAttempt: 3})
             .invoke(options.input)
 

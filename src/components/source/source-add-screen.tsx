@@ -24,6 +24,8 @@ import {HealthDataParserDocumentListResponse} from "@/app/api/health-data-parser
 import {HealthDataParserVisionModelListResponse} from "@/app/api/health-data-parser/visions/[id]/models/route";
 import {HealthDataParserDocumentModelListResponse} from "@/app/api/health-data-parser/documents/[id]/models/route";
 import {ConditionalDeploymentEnv} from "@/components/common/deployment-env";
+import {useTranslations} from "next-intl";
+import {countries} from "@/lib/countries";
 
 const Select = dynamic(() => import('react-select'), {ssr: false});
 
@@ -91,64 +93,101 @@ const HealthDataType = {
     }
 };
 
-const personalInfoFields: Field[] = [
-    {key: 'name', label: 'Name', type: 'text'},
-    {key: 'birthDate', label: 'Birth Date', type: 'date'},
-    {
-        key: 'height',
-        label: 'Height',
-        type: 'compound',
-        fields: [
-            {key: 'value', type: 'number', placeholder: 'Height'},
-            {
-                key: 'unit',
-                type: 'select',
-                options: [
-                    {value: 'cm', label: 'cm'},
-                    {value: 'ft', label: 'ft'}
-                ],
-                defaultValue: 'cm'
-            }
-        ]
-    },
-    {
-        key: 'weight',
-        label: 'Weight',
-        type: 'compound',
-        fields: [
-            {key: 'value', type: 'number', placeholder: 'Weight'},
-            {
-                key: 'unit',
-                type: 'select',
-                options: [
-                    {value: 'kg', label: 'kg'},
-                    {value: 'lbs', label: 'lbs'}
-                ],
-                defaultValue: 'kg'
-            }
-        ]
-    },
-    {
-        key: 'bloodType',
-        label: 'Blood Type',
-        type: 'select',
-        options: [
-            {value: 'A+', label: 'A+'},
-            {value: 'A-', label: 'A-'},
-            {value: 'B+', label: 'B+'},
-            {value: 'B-', label: 'B-'},
-            {value: 'O+', label: 'O+'},
-            {value: 'O-', label: 'O-'},
-            {value: 'AB+', label: 'AB+'},
-            {value: 'AB-', label: 'AB-'}
-        ]
-    },
-    {key: 'familyHistory', label: 'Family History', type: 'textarea'}
-];
+const personalInfoFields = (t: any, top: any): Field[] => {
+    return [
+        {key: 'name', label: t('name'), type: 'text'},
+        {
+            key: 'gender',
+            label: top('gender.label'),
+            type: 'select',
+            options: [
+                {value: 'male', label: top('gender.male')},
+                {value: 'female', label: top('gender.female')}
+            ]
+        },
+        {key: 'birthDate', label: t('birthdate'), type: 'date'},
+        {
+            key: 'height',
+            label: t('height'),
+            type: 'compound',
+            fields: [
+                {key: 'value', type: 'number', placeholder: t('height')},
+                {
+                    key: 'unit',
+                    type: 'select',
+                    options: [
+                        {value: 'cm', label: 'cm'},
+                        {value: 'ft', label: 'ft'}
+                    ],
+                    defaultValue: 'cm'
+                }
+            ]
+        },
+        {
+            key: 'weight',
+            label: t('weight'),
+            type: 'compound',
+            fields: [
+                {key: 'value', type: 'number', placeholder: t('weight')},
+                {
+                    key: 'unit',
+                    type: 'select',
+                    options: [
+                        {value: 'kg', label: 'kg'},
+                        {value: 'lbs', label: 'lbs'}
+                    ],
+                    defaultValue: 'kg'
+                }
+            ]
+        },
+        {
+            key: 'ethnicity',
+            label: top('ethnicity.label'),
+            type: 'select',
+            options: [
+                {value: 'east_asian', label: top('ethnicity.options.east_asian')},
+                {value: 'southeast_asian', label: top('ethnicity.options.southeast_asian')},
+                {value: 'south_asian', label: top('ethnicity.options.south_asian')},
+                {value: 'european', label: top('ethnicity.options.european')},
+                {value: 'middle_eastern', label: top('ethnicity.options.middle_eastern')},
+                {value: 'african', label: top('ethnicity.options.african')},
+                {value: 'african_american', label: top('ethnicity.options.african_american')},
+                {value: 'pacific_islander', label: top('ethnicity.options.pacific_islander')},
+                {value: 'native_american', label: top('ethnicity.options.native_american')},
+                {value: 'hispanic', label: top('ethnicity.options.hispanic')},
+                {value: 'mixed', label: top('ethnicity.options.mixed')},
+                {value: 'other', label: top('ethnicity.options.other')}
+            ],
+        },
+        {
+            key: 'country',
+            label: top('country.label'),
+            type: 'select',
+            options: countries.map(({code: value, name: label}) => ({value, label})),
+        },
+        {
+            key: 'bloodType',
+            label: t('bloodType'),
+            type: 'select',
+            options: [
+                {value: 'A+', label: 'A+'},
+                {value: 'A-', label: 'A-'},
+                {value: 'B+', label: 'B+'},
+                {value: 'B-', label: 'B-'},
+                {value: 'O+', label: 'O+'},
+                {value: 'O-', label: 'O-'},
+                {value: 'AB+', label: 'AB+'},
+                {value: 'AB-', label: 'AB-'}
+            ]
+        },
+        {key: 'familyHistory', label: t('familyHistory'), type: 'textarea'}
+    ]
+};
 
-const symptomsFields: Field[] = [
-    {key: 'date', label: 'Date', type: 'date'},
-    {key: 'description', label: 'Description', type: 'textarea'}
+const symptomsFields = (t: any): Field[] => [
+    {key: 'date', label: t('date'), type: 'date'},
+    {key: 'endDate', label: t('endDate'), type: 'date'},
+    {key: 'description', label: t('description'), type: 'textarea'}
 ];
 
 const AddSourceDialog: React.FC<AddSourceDialogProps> = ({
@@ -157,6 +196,8 @@ const AddSourceDialog: React.FC<AddSourceDialogProps> = ({
                                                              onFileUpload,
                                                              onAddSymptoms
                                                          }) => {
+    const t = useTranslations('SourceManagement')
+
     const [open, setOpen] = useState(false);
     const [showSettingsAlert, setShowSettingsAlert] = useState(false);
     const [uploadStatus, setUploadStatus] = useState<string>('');
@@ -193,12 +234,12 @@ const AddSourceDialog: React.FC<AddSourceDialogProps> = ({
                 <DialogTrigger asChild>
                     <Button variant="outline" className="w-full flex gap-2 items-center">
                         <Plus className="w-4 h-4"/>
-                        Add Source
+                        {t('addSource')}
                     </Button>
                 </DialogTrigger>
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>Add New Source</DialogTitle>
+                        <DialogTitle>{t('addNewSource')}</DialogTitle>
                     </DialogHeader>
                     <div className="flex flex-col gap-4 min-w-[300px]">
                         <label
@@ -214,8 +255,8 @@ const AddSourceDialog: React.FC<AddSourceDialogProps> = ({
                                 <FileText className="w-6 h-6 text-gray-500"/>
                             )}
                             <div className="flex-1">
-                                <h3 className="font-medium">Upload Files</h3>
-                                <p className="text-sm text-gray-500">Add images or PDF files</p>
+                                <h3 className="font-medium">{t('uploadFiles')}</h3>
+                                <p className="text-sm text-gray-500">{t('uploadFilesDescription')}</p>
                             </div>
                         </label>
                         <input
@@ -234,8 +275,8 @@ const AddSourceDialog: React.FC<AddSourceDialogProps> = ({
                         >
                             <Activity className="w-6 h-6 text-gray-500"/>
                             <div className="flex-1 text-left">
-                                <h3 className="font-medium">New Symptoms</h3>
-                                <p className="text-sm text-gray-500">Record today&#39;s symptoms</p>
+                                <h3 className="font-medium">{t('uploadSymptoms')}</h3>
+                                <p className="text-sm text-gray-500">{t('uploadSymptomsDescription')}</p>
                             </div>
                         </button>
                     </div>
@@ -271,6 +312,8 @@ const AddSourceDialog: React.FC<AddSourceDialogProps> = ({
 };
 
 const HealthDataItem: React.FC<HealthDataItemProps> = ({healthData, isSelected, onClick, onDelete}) => {
+    const t = useTranslations('SourceManagement')
+
     const getIcon = (type: string) => {
         switch (type) {
             case HealthDataType.FILE.id:
@@ -285,9 +328,15 @@ const HealthDataItem: React.FC<HealthDataItemProps> = ({healthData, isSelected, 
     };
 
     const getName = (type: string) => {
-        if (type === HealthDataType.SYMPTOMS.id && healthData.data) {
+        if (type === HealthDataType.PERSONAL_INFO.id) {
+            return t('personalInfo')
+        } else if (type === HealthDataType.SYMPTOMS.id && healthData.data) {
             const data = healthData.data as unknown as SymptomsData;
-            return `${HealthDataType.SYMPTOMS.name} (${data.date})`;
+            if (data.date) {
+                return `${t('symptoms')} (${data.date})`;
+            } else {
+                return `${t('symptoms')}`;
+            }
         }
         if (type === HealthDataType.FILE.id && healthData.data) {
             const data = healthData.data as any;
@@ -317,7 +366,6 @@ ${isSelected
                 )}
                 <Button
                     variant="ghost"
-                    size="icon"
                     onClick={(e) => {
                         e.stopPropagation();
                         onDelete(healthData.id);
@@ -331,6 +379,9 @@ ${isSelected
 };
 
 const HealthDataPreview = ({healthData, formData, setFormData, setHealthData}: HealthDataPreviewProps) => {
+    const t = useTranslations('SourceManagement')
+    const top = useTranslations('Onboarding.personalInfo');
+
     const [loading, setLoading] = useState<boolean>(false);
     const [numPages, setNumPages] = useState(0);
     const [page, setPage] = useState<number>(1);
@@ -456,9 +507,9 @@ const HealthDataPreview = ({healthData, formData, setFormData, setHealthData}: H
     const getFields = (): Field[] => {
         switch (healthData.type) {
             case HealthDataType.PERSONAL_INFO.id:
-                return personalInfoFields;
+                return personalInfoFields(t, top);
             case HealthDataType.SYMPTOMS.id:
-                return symptomsFields;
+                return symptomsFields(t);
             default:
                 return [];
         }
@@ -866,6 +917,8 @@ const HealthDataPreview = ({healthData, formData, setFormData, setHealthData}: H
 };
 
 export default function SourceAddScreen() {
+    const t = useTranslations('SourceManagement')
+
     const [selectedId, setSelectedId] = useState<string | null>(null);
     const [formData, setFormData] = useState<Record<string, any>>({});
     const [isOpen, setIsOpen] = useState(true);
@@ -1152,7 +1205,7 @@ export default function SourceAddScreen() {
     return (
         <div className="flex flex-col h-screen">
             <div className="h-14 border-b px-4 flex items-center justify-between">
-                <h1 className="text-base font-semibold">Source Management</h1>
+                <h1 className="text-base font-semibold">{t('title')}</h1>
             </div>
             <div className="flex flex-1 overflow-hidden">
                 <div className="w-80 border-r flex flex-col">
@@ -1199,22 +1252,22 @@ export default function SourceAddScreen() {
                     {isOpen ? (
                         <>
                             <div className="h-12 px-4 flex items-center justify-between border-t">
-                                <h2 className="text-sm font-medium">Parsing Settings</h2>
-                                <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
+                                <h2 className="text-sm font-medium">{t('parsingSettings')}</h2>
+                                <Button variant="ghost" onClick={() => setIsOpen(false)}>
                                     <ChevronRight className="h-4 w-4"/>
                                 </Button>
                             </div>
                             <div className="flex-1 overflow-y-auto">
                                 <div className="p-4 space-y-4">
                                     <p className="text-sm text-muted-foreground">
-                                        Vision and OCR models are used together to enhance parsing performance.
+                                        {t('parsingSettingsDescription')}
                                     </p>
 
                                     <div className="space-y-4">
                                         <div>
-                                            <h3 className="text-sm font-medium mb-2">Vision Model</h3>
+                                            <h3 className="text-sm font-medium mb-2">{t('visionModel')}</h3>
                                             <p className="text-sm text-muted-foreground mb-2">
-                                                Only models with vision capabilities can be used.
+                                                {t('visionModelDescription')}
                                             </p>
                                             <div className="space-y-2">
                                                 <Select
@@ -1244,7 +1297,7 @@ export default function SourceAddScreen() {
                                                     className="basic-single text-sm"
                                                     classNamePrefix="select"
                                                     isSearchable={false}
-                                                    placeholder="Select model"
+                                                    placeholder={t('selectModel')}
                                                     value={visionParserModel}
                                                     onChange={(selected: any) => setVisionParserModel(selected)}
                                                     options={visionModelDataList?.models?.map((model) => ({
@@ -1256,12 +1309,12 @@ export default function SourceAddScreen() {
                                                 <ConditionalDeploymentEnv env={['local']}>
                                                     {visionDataList?.visions?.find(v => v.name === visionParser?.value)?.apiKeyRequired && (
                                                         <div className="space-y-2">
-                                                            <label className="text-sm font-medium">API Key</label>
+                                                            <label className="text-sm font-medium">{t('apiKey')}</label>
                                                             <input
                                                                 type="password"
                                                                 aria-autocomplete={'none'}
                                                                 autoComplete={'off'}
-                                                                placeholder="Enter your API key"
+                                                                placeholder={t('enterYourAPIKey')}
                                                                 className="w-full p-2 border rounded-md text-sm"
                                                                 value={visionParserApiKey}
                                                                 onChange={(e) => setVisionParserApiKey(e.target.value)}
@@ -1274,7 +1327,7 @@ export default function SourceAddScreen() {
                                                             <input
                                                                 aria-autocomplete={'none'}
                                                                 autoComplete={'off'}
-                                                                placeholder="Enter your API Url"
+                                                                placeholder={t('enterYourAPIUrl')}
                                                                 className="w-full p-2 border rounded-md text-sm"
                                                                 value={visionParserApiUrl}
                                                                 onChange={(e) => setVisionParserApiUrl(e.target.value)}
@@ -1286,24 +1339,24 @@ export default function SourceAddScreen() {
                                         </div>
 
                                         <div>
-                                            <h3 className="text-sm font-medium mb-2">Document Model</h3>
+                                            <h3 className="text-sm font-medium mb-2">{t('documentModel')}</h3>
                                             <p className="text-sm text-muted-foreground mb-2">
                                                 <span className="block mb-2">
-                                                    Docling is an open-source parsing model that runs locally.{' '}
+                                                    {t('documentModelDescription')}{' '}
                                                     <a href="https://github.com/DS4SD/docling"
                                                        className="text-primary hover:underline" target="_blank"
                                                        rel="noopener noreferrer">
-                                                        GitHub
+                                                        {t('documentModelDoclingGithub')}
                                                     </a>
                                                 </span>
                                                 <span className="block">
-                                                        Upstage showed the best performance in our tests.{' '}
+                                                        {t('documentModelUpstageDescription')}{' '}
                                                     <a href="https://www.upstage.ai"
                                                        className="text-primary hover:underline" target="_blank"
                                                        rel="noopener noreferrer">
-                                                            Upstage
+                                                        {t('documentModelUpstage')}
                                                         </a>
-                                                    {' '}offers $10 free credit for new sign-ups, no card required.
+                                                    {' '} {t('documentModelUpstageDescription2')}
                                                     </span>
                                             </p>
                                             <div className="space-y-2">
@@ -1325,7 +1378,7 @@ export default function SourceAddScreen() {
                                                     className="basic-single text-sm"
                                                     classNamePrefix="select"
                                                     isSearchable={false}
-                                                    placeholder="Select model"
+                                                    placeholder={t('selectModel')}
                                                     value={documentParserModel}
                                                     onChange={(selected: any) => {
                                                         setDocumentParserModel(selected)
@@ -1339,10 +1392,10 @@ export default function SourceAddScreen() {
                                                 <ConditionalDeploymentEnv env={['local']}>
                                                     {documentDataList?.documents?.find(v => v.name === documentParser?.value)?.apiKeyRequired && (
                                                         <div className="space-y-2">
-                                                            <label className="text-sm font-medium">API Key</label>
+                                                            <label className="text-sm font-medium">{t('apiKey')}</label>
                                                             <input
                                                                 type="password"
-                                                                placeholder="Enter your API key"
+                                                                placeholder={t('enterYourAPIKey')}
                                                                 className="w-full p-2 border rounded-md text-sm"
                                                                 value={documentParserApiKey}
                                                                 onChange={(e) => setDocumentParserApiKey(e.target.value)}
@@ -1358,7 +1411,7 @@ export default function SourceAddScreen() {
                         </>
                     ) : (
                         <div className="h-12 flex items-center justify-center border-t">
-                            <Button variant="ghost" size="icon" onClick={() => setIsOpen(true)}>
+                            <Button variant="ghost" onClick={() => setIsOpen(true)}>
                                 <ChevronLeft className="h-4 w-4"/>
                             </Button>
                         </div>

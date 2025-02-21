@@ -5,19 +5,15 @@ import React, {useMemo, useState} from "react";
 import useSWR from "swr";
 import {ChatRoom, ChatRoomListResponse} from "@/app/api/chat-rooms/route";
 import {Button} from "@/components/ui/button";
-import {Files, FileText, MessageCircle, Download, Copy, Trash2} from "lucide-react";
+import {Copy, Download, Files, FileText, MessageCircle, Trash2} from "lucide-react";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import {HealthDataListResponse} from "@/app/api/health-data/route";
 import dayjs from "@/lib/dayjs";
-import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter} from "@/components/ui/dialog";
+import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import JSONEditor from "@/components/form/json-editor";
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip"
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,} from "@/components/ui/tooltip"
+import {useTranslations} from "next-intl";
 
 interface ChatSideBarProps {
     isLeftSidebarOpen: boolean;
@@ -28,6 +24,7 @@ export default function ChatSideBar({
                                         chatRoomId,
                                         isLeftSidebarOpen
                                     }: ChatSideBarProps) {
+    const t = useTranslations('ChatSideBar')
     const router = useRouter()
     const [jsonViewerOpen, setJsonViewerOpen] = useState(false);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -141,8 +138,8 @@ export default function ChatSideBar({
     }
 
     return <>
-        <div className={`border-r bg-gray-50 flex flex-col transition-all duration-300 ease-in-out
-          ${isLeftSidebarOpen ? 'w-72' : 'w-16'} relative`}>
+        <div className={`border-r bg-gray-50 flex flex-col transition-all duration-300 ease-in-out overflow-clip
+          ${isLeftSidebarOpen ? 'w-72' : 'w-0'} relative`}>
             <div className={`absolute inset-0 ${isLeftSidebarOpen ? 'opacity-100' : 'opacity-0'} 
                 transition-opacity duration-300 overflow-hidden flex flex-col`}>
                 <div className="border-b bg-white">
@@ -151,10 +148,10 @@ export default function ChatSideBar({
                             <>
                                 <div className="flex items-center justify-between">
                                     <div className="space-y-1">
-                                        <h3 className="text-sm font-medium tracking-tight">Sources</h3>
+                                        <h3 className="text-sm font-medium tracking-tight">{t('sources')}</h3>
                                         <div className="flex gap-3 text-xs text-gray-500">
-                                            <span>{healthDataList.length} files</span>
-                                            <span>{totalTokens.toLocaleString()} tokens</span>
+                                            <span>{t('numberOfFiles', {value: healthDataList.length})}</span>
+                                            <span>{t('countOfTokens', {value: totalTokens.toLocaleString()})}</span>
                                         </div>
                                     </div>
                                     <TooltipProvider>
@@ -167,7 +164,7 @@ export default function ChatSideBar({
                                                 </Button>
                                             </TooltipTrigger>
                                             <TooltipContent>
-                                                <p>View aggregated sources</p>
+                                                <p>{t('viewAggregatedSources')}</p>
                                             </TooltipContent>
                                         </Tooltip>
                                     </TooltipProvider>
@@ -178,7 +175,7 @@ export default function ChatSideBar({
                                     onClick={() => router.push('/source')}
                                 >
                                     <Files className="w-3 h-3 mr-2"/>
-                                    Manage Sources
+                                    {t('manageSources')}
                                 </Button>
                             </>
                         ) : (
@@ -188,7 +185,7 @@ export default function ChatSideBar({
                                 onClick={() => router.push('/source')}
                             >
                                 <Files className="w-3 h-3 mr-2"/>
-                                Manage Sources
+                                {t('manageSources')}
                             </Button>
                         )}
                     </div>
@@ -201,7 +198,7 @@ export default function ChatSideBar({
                         onClick={handleStartNewChat}
                     >
                         <MessageCircle className="w-3 h-3 mr-2"/>
-                        New Chat
+                        {t('newChat')}
                     </Button>
 
                     <div className="space-y-1">
@@ -214,10 +211,9 @@ export default function ChatSideBar({
                             >
                                 <div className="pr-8 font-medium truncate">{chatRoom.name}</div>
                                 <div
-                                    className="pr-8 text-xs text-gray-500 mt-0.5">{dayjs(chatRoom.updatedAt).format('L LT')}</div>
+                                    className="pr-8 text-xs text-gray-500 mt-0.5">{dayjs(chatRoom.lastActivityAt).format('L LT')}</div>
                                 <Button
                                     variant="ghost"
-                                    size="icon"
                                     className="absolute right-1 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 h-7 w-7"
                                     onClick={(e) => handleDeleteChat(chatRoom.id, e)}
                                 >
@@ -230,10 +226,10 @@ export default function ChatSideBar({
             </div>
             {!isLeftSidebarOpen && (
                 <div className="flex flex-col items-center pt-4 gap-4">
-                    <Button variant="ghost" size="icon">
+                    <Button variant="ghost">
                         <Files className="h-4 w-4"/>
                     </Button>
-                    <Button variant="ghost" size="icon">
+                    <Button variant="ghost">
                         <MessageCircle className="h-4 w-4"/>
                     </Button>
                 </div>
@@ -243,15 +239,15 @@ export default function ChatSideBar({
         <Dialog open={jsonViewerOpen} onOpenChange={setJsonViewerOpen}>
             <DialogContent className="max-w-3xl h-[80vh] flex flex-col">
                 <DialogHeader className="flex-shrink-0">
-                    <DialogTitle>Aggregated Sources</DialogTitle>
+                    <DialogTitle>{t('aggregatedSources')}</DialogTitle>
                     <div className="flex justify-end gap-2">
                         <Button size="sm" variant="outline" onClick={handleCopyToClipboard}>
                             <Copy className="w-4 h-4 mr-2"/>
-                            Copy
+                            {t('copy')}
                         </Button>
                         <Button size="sm" variant="outline" onClick={handleDownload}>
                             <Download className="w-4 h-4 mr-2"/>
-                            Download
+                            {t('download')}
                         </Button>
                     </div>
                 </DialogHeader>
@@ -288,11 +284,11 @@ export default function ChatSideBar({
         <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
             <DialogContent className="sm:max-w-[400px]">
                 <DialogHeader>
-                    <DialogTitle className="text-lg font-semibold tracking-tight">Delete Chat</DialogTitle>
+                    <DialogTitle className="text-lg font-semibold tracking-tight">{t('chatDeleteTitle')}</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-1.5 py-3">
-                    <p className="text-sm">Are you sure you want to delete this chat?</p>
-                    <p className="text-xs text-gray-500">This action cannot be undone.</p>
+                    <p className="text-sm">{t('chatDeleteMessage')}</p>
+                    <p className="text-xs text-gray-500">{t('chatDeleteMessageDetail')}</p>
                 </div>
                 <DialogFooter className="gap-2 sm:gap-0">
                     <Button
@@ -300,14 +296,14 @@ export default function ChatSideBar({
                         onClick={() => setDeleteDialogOpen(false)}
                         className="text-sm"
                     >
-                        Cancel
+                        {t('cancel')}
                     </Button>
                     <Button
                         variant="outline"
                         onClick={confirmDelete}
                         className="text-sm bg-gray-200 hover:bg-gray-300 text-gray-900"
                     >
-                        Delete
+                        {t('delete')}
                     </Button>
                 </DialogFooter>
             </DialogContent>

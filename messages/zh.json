@@ -1,0 +1,179 @@
+{
+  "HomePage": {
+  },
+  "Chat": {
+    "inputPlaceholder": "输入消息..."
+  },
+  "Feedback": {
+    "helpMessage": "帮助 OpenHealth 解决您和更多人的健康问题",
+    "shareFeedback": "分享反馈"
+  },
+  "ChatSideBar": {
+    "sources": "来源",
+    "numberOfFiles": "{value, number} 个文件",
+    "countOfTokens": "{value, number} 个令牌",
+    "viewAggregatedSources": "查看汇总来源",
+    "aggregatedSources": "汇总来源",
+    "manageSources": "管理来源",
+    "newChat": "新对话",
+    "copy": "复制",
+    "download": "下载",
+    "chatDeleteTitle": "删除对话",
+    "chatDeleteMessage": "确定要删除此对话吗？",
+    "chatDeleteMessageDetail": "此操作无法撤销。",
+    "cancel": "取消",
+    "delete": "删除"
+  },
+  "ChatSettingSideBar": {
+    "modelSettings": "模型设置",
+    "systemPrompt": "系统提示",
+    "assistantMode": "助手模式",
+    "selectModel": "选择模型",
+    "selectCompany": "选择公司",
+    "noModelsFound": "未找到模型。",
+    "enterApiKey": "输入API密钥",
+    "show": "显示",
+    "hide": "隐藏"
+  },
+  "SourceManagement": {
+    "title": "来源管理",
+    "addSource": "添加来源",
+    "addNewSource": "添加新来源",
+    "personalInfo": "个人信息",
+    "parsingSettings": "解析设置",
+    "parsingSettingsDescription": "Vision和OCR模型一起使用以提高解析性能。",
+    "visionModel": "Vision模型",
+    "visionModelDescription": "只能使用具有视觉功能的模型。",
+    "documentModel": "文档模型",
+    "documentModelDescription": "Docling是一个本地运行的开源解析模型。",
+    "documentModelDoclingGithub": "Github",
+    "documentModelUpstage": "Upstage",
+    "documentModelUpstageDescription": "Upstage在我们的测试中表现最好。",
+    "documentModelUpstageDescription2": "为新注册用户提供$10免费额度，无需信用卡。",
+    "name": "姓名",
+    "birthdate": "出生日期",
+    "height": "身高",
+    "weight": "体重",
+    "bloodType": "血型",
+    "familyHistory": "家族病史",
+    "select": "选择",
+    "extractedData": "提取的数据",
+    "update": "更新",
+    "uploadFiles": "上传文件",
+    "uploadFilesDescription": "添加图片或PDF文件。",
+    "uploadSymptoms": "新症状",
+    "uploadSymptomsDescription": "记录今天的症状。",
+    "date": "日期",
+    "endDate": "结束日期",
+    "description": "描述",
+    "symptoms": "症状",
+    "selectModel": "选择模型",
+    "apiKey": "API密钥",
+    "enterYourAPIKey": "输入您的API密钥",
+    "enterYourAPIUrl": "输入您的API URL"
+  },
+  "DynamicForm": {
+    "selectPlaceholder": "请选择..."
+  },
+  "LoginPage": {
+    "username": "用户名",
+    "usernamePlaceholder": "输入您的用户名",
+    "password": "密码",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "登录",
+    "needSignUp": "需要账号？注册",
+    "alreadyHaveAccount": "已有账号？登录",
+    "signUp": "创建账号"
+  },
+  "Onboarding": {
+    "introduction": {
+      "title": "Health Solver",
+      "subtitle": "by OpenHealth",
+      "description": "有未解决的健康问题吗？\n让AI深入分析您的数据",
+      "privacyNotice": "您的收集数据仅用于解决您的健康问题。",
+      "runLocally": "您可以在本地运行",
+      "here": "这里"
+    },
+    "healthConcerns": {
+      "title": "健康问题",
+      "description": "请详细描述您当前的健康问题",
+      "placeholder": "示例：\n- 您有什么症状？\n- 什么时候开始的？\n- 什么会加重症状？\n- 您以前是否有过类似的症状？",
+      "error": "请描述您的健康问题"
+    },
+    "personalInfo": {
+      "title": "个人信息",
+      "description": "帮助我们更好地了解您的情况",
+      "gender": {
+        "label": "性别",
+        "male": "男",
+        "female": "女",
+        "error": "请选择您的性别"
+      },
+      "birthDate": {
+        "label": "出生日期",
+        "error": "请输入您的出生日期"
+      },
+      "height": {
+        "label": "身高",
+        "placeholder": {
+          "cm": "170",
+          "ft": "5.6"
+        },
+        "error": "请输入您的身高"
+      },
+      "weight": {
+        "label": "体重",
+        "placeholder": {
+          "kg": "65",
+          "lb": "143"
+        },
+        "error": "请输入您的体重"
+      },
+      "ethnicity": {
+        "label": "族裔",
+        "placeholder": "选择您的族裔",
+        "options": {
+          "east_asian": "东亚",
+          "southeast_asian": "东南亚",
+          "south_asian": "南亚",
+          "european": "欧洲",
+          "middle_eastern": "中东/北非",
+          "african": "非洲",
+          "african_american": "非裔美国人",
+          "pacific_islander": "太平洋岛民",
+          "native_american": "美洲原住民",
+          "hispanic": "西班牙裔/拉丁裔",
+          "mixed": "混合族裔",
+          "other": "其他"
+        },
+        "error": "请选择您的族裔"
+      },
+      "country": {
+        "label": "国家",
+        "placeholder": "输入您的国家名称",
+        "error": "请选择您的国家"
+      }
+    },
+    "medicalRecords": {
+      "title": "医疗记录",
+      "description": "上传您的医疗记录以获得更好的分析（可选）",
+      "dragDrop": {
+        "title": "将文件拖放到这里",
+        "or": "或",
+        "browse": "浏览文件",
+        "supportedFormats": "支持的格式：PDF、JPEG、PNG、DOC"
+      }
+    },
+    "analysis": {
+      "description": "AI正在分析您的健康数据以了解您的状况\n并提供个性化的健康见解"
+    },
+    "navigation": {
+      "back": "返回",
+      "next": "下一步",
+      "skip": "跳过"
+    },
+    "healthSolver": {
+      "message": "告诉我您的健康问题"
+    }
+  }
+} 

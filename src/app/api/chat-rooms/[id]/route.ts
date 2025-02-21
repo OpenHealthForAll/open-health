@@ -35,7 +35,7 @@ export async function GET(
             llmProviderId: true,
             llmProviderModelId: true,
             createdAt: true,
-            updatedAt: true
+            lastActivityAt: true
         }
     });
 
@@ -68,7 +68,7 @@ export async function PATCH(
             llmProviderId: true,
             llmProviderModelId: true,
             createdAt: true,
-            updatedAt: true
+            lastActivityAt: true
         }
     });
 

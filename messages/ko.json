@@ -1,0 +1,179 @@
+{
+  "HomePage": {
+  },
+  "Chat": {
+    "inputPlaceholder": "메시지 입력..."
+  },
+  "Feedback": {
+    "helpMessage": "오픈헬스를 도와 당신의 건강문제와 더 많은 사람들의 건강문제를 해결할 수 있도록 해주세요",
+    "shareFeedback": "피드백 남기기"
+  },
+  "ChatSideBar": {
+    "sources": "소스",
+    "numberOfFiles": "{value, number} 파일",
+    "countOfTokens": "{value, number} 토큰",
+    "viewAggregatedSources": "집계된 소스 보기",
+    "aggregatedSources": "집계된 소스",
+    "manageSources": "소스 관리",
+    "newChat": "새 채팅",
+    "copy": "복사",
+    "download": "다운로드",
+    "chatDeleteTitle": "채팅 삭제",
+    "chatDeleteMessage": "이 채팅을 삭제하시겠습니까?",
+    "chatDeleteMessageDetail": "이 작업은 취소할 수 없습니다.",
+    "cancel": "취소",
+    "delete": "삭제"
+  },
+  "ChatSettingSideBar": {
+    "modelSettings": "모델 설정",
+    "systemPrompt": "시스템 프롬프트",
+    "assistantMode": "어시스턴트 모드",
+    "selectModel": "모델 선택",
+    "selectCompany": "회사 선택",
+    "noModelsFound": "모델을 찾을 수 없습니다.",
+    "enterApiKey": "API 키 입력",
+    "show": "보기",
+    "hide": "숨기기"
+  },
+  "SourceManagement": {
+    "title": "소스 관리",
+    "addSource": "소스 추가",
+    "addNewSource": "새 소스 추가",
+    "personalInfo": "개인 정보",
+    "parsingSettings": "구문 분석 설정",
+    "parsingSettingsDescription": "구문 분석 성능을 향상시키기 위해 비전과 OCR 모델을 함께 사용합니다.",
+    "visionModel": "비전 모델",
+    "visionModelDescription": "비전 기능이 있는 모델만 사용할 수 있습니다.",
+    "documentModel": "문서 모델",
+    "documentModelDescription": "Docling은 로컬에서 실행되는 오픈 소스 구문 분석 모델입니다.",
+    "documentModelDoclingGithub": "Github",
+    "documentModelUpstage": "Upstage",
+    "documentModelUpstageDescription": "Upstage가 테스트에서 최고의 성능을 보여주었습니다.",
+    "documentModelUpstageDescription2": "는 카드 없이도 신규 가입 시 $10 무료 크레딧을 제공합니다.",
+    "name": "이름",
+    "birthdate": "생일",
+    "height": "키",
+    "weight": "몸무게",
+    "bloodType": "혈액형",
+    "familyHistory": "가족력",
+    "select": "선택",
+    "extractedData": "추출된 데이터",
+    "update": "업데이트",
+    "uploadFiles": "파일 업로드",
+    "uploadFilesDescription": "이미지 또는 PDF 파일을 추가합니다.",
+    "uploadSymptoms": "증상 추가",
+    "uploadSymptomsDescription": "오늘의 증상을 기록합니다.",
+    "date": "날짜",
+    "endDate": "종료일",
+    "description": "설명",
+    "symptoms": "증상",
+    "selectModel": "모델 선택",
+    "apiKey": "API 키",
+    "enterYourAPIKey": "API 키를 입력하세요",
+    "enterYourAPIUrl": "API URL을 입력하세요"
+  },
+  "DynamicForm": {
+    "selectPlaceholder": "선택..."
+  },
+  "LoginPage": {
+    "username": "사용자 이름",
+    "usernamePlaceholder": "사용자 이름을 입력하세요",
+    "password": "비밀번호",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "로그인",
+    "needSignUp": "계정이 없으신가요? 가입하기",
+    "alreadyHaveAccount": "계정이 있으신가요? 로그인",
+    "signUp": "계정 만들기"
+  },
+  "Onboarding": {
+    "introduction": {
+      "title": "Health Solver",
+      "subtitle": "by OpenHealth",
+      "description": "해결되지 않은 건강 문제가 있으신가요?\nAI가 당신의 데이터를 심층 분석합니다",
+      "privacyNotice": "수집된 데이터는 오직 귀하의 건강 문제 해결을 위해서만 사용됩니다.",
+      "runLocally": "로컬에서 실행할 수 있습니다",
+      "here": "여기"
+    },
+    "healthConcerns": {
+      "title": "건강 문제",
+      "description": "현재 겪고 계신 건강 문제를 자세히 설명해 주세요",
+      "placeholder": "예시: \n- 어떤 증상이 있나요?\n- 언제부터 시작되었나요?\n- 어떤 상황에서 증상이 악화되나요?\n- 이전에도 비슷한 증상을 경험한 적이 있나요?",
+      "error": "건강 문제를 설명해 주세요"
+    },
+    "personalInfo": {
+      "title": "개인 정보",
+      "description": "귀하의 프로필을 더 잘 이해할 수 있도록 도와주세요",
+      "gender": {
+        "label": "성별",
+        "male": "남성",
+        "female": "여성",
+        "error": "성별을 선택해 주세요"
+      },
+      "birthDate": {
+        "label": "생년월일",
+        "error": "생년월일을 입력해 주세요"
+      },
+      "height": {
+        "label": "키",
+        "placeholder": {
+          "cm": "170",
+          "ft": "5.6"
+        },
+        "error": "키를 입력해 주세요"
+      },
+      "weight": {
+        "label": "체중",
+        "placeholder": {
+          "kg": "65",
+          "lb": "143"
+        },
+        "error": "체중을 입력해 주세요"
+      },
+      "ethnicity": {
+        "label": "인종",
+        "placeholder": "인종을 선택하세요",
+        "options": {
+          "east_asian": "동아시아인",
+          "southeast_asian": "동남아시아인",
+          "south_asian": "남아시아인",
+          "european": "유럽인",
+          "middle_eastern": "중동/북아프리카인",
+          "african": "아프리카인",
+          "african_american": "아프리카계 미국인",
+          "pacific_islander": "태평양 섬 주민",
+          "native_american": "아메리카 원주민",
+          "hispanic": "히스패닉/라틴계",
+          "mixed": "혼혈",
+          "other": "기타"
+        },
+        "error": "인종을 선택해 주세요"
+      },
+      "country": {
+        "label": "국가",
+        "placeholder": "국가명을 입력하세요",
+        "error": "국가를 선택해 주세요"
+      }
+    },
+    "medicalRecords": {
+      "title": "의료 기록",
+      "description": "더 나은 분석을 위해 의료 기록을 업로드하세요 (선택사항)",
+      "dragDrop": {
+        "title": "파일을 여기에 끌어다 놓으세요",
+        "or": "또는",
+        "browse": "파일 찾기",
+        "supportedFormats": "지원 형식: PDF, JPEG, PNG, DOC"
+      }
+    },
+    "analysis": {
+      "description": "AI가 귀하의 건강 데이터를 분석하여 상태를 파악하고\n맞춤형 건강 인사이트를 제공합니다"
+    },
+    "navigation": {
+      "back": "이전",
+      "next": "다음",
+      "skip": "건너뛰기"
+    },
+    "healthSolver": {
+      "message": "나의 건강 문제에 대해 설명해 주세요"
+    }
+  }
+}

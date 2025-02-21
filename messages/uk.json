@@ -1,0 +1,179 @@
+{
+  "HomePage": {
+  },
+  "Chat": {
+    "inputPlaceholder": "Введіть повідомлення..."
+  },
+  "Feedback": {
+    "helpMessage": "Допоможіть OpenHealth вирішувати проблеми зі здоров'ям для вас та багатьох інших",
+    "shareFeedback": "Залишити відгук"
+  },
+  "ChatSideBar": {
+    "sources": "Джерела",
+    "numberOfFiles": "{value, number} файлів",
+    "countOfTokens": "{value, number} токенів",
+    "viewAggregatedSources": "Переглянути агреговані джерела",
+    "aggregatedSources": "Агреговані джерела",
+    "manageSources": "Керування джерелами",
+    "newChat": "Новий чат",
+    "copy": "Копіювати",
+    "download": "Завантажити",
+    "chatDeleteTitle": "Видалити чат",
+    "chatDeleteMessage": "Ви впевнені, що хочете видалити цей чат?",
+    "chatDeleteMessageDetail": "Цю дію неможливо скасувати.",
+    "cancel": "Скасувати",
+    "delete": "Видалити"
+  },
+  "ChatSettingSideBar": {
+    "modelSettings": "Налаштування моделі",
+    "systemPrompt": "Системний промпт",
+    "assistantMode": "Режим асистента",
+    "selectModel": "Вибрати модель",
+    "selectCompany": "Вибрати компанію",
+    "noModelsFound": "Моделі не знайдено.",
+    "enterApiKey": "Введіть API ключ",
+    "show": "Показати",
+    "hide": "Приховати"
+  },
+  "SourceManagement": {
+    "title": "Керування джерелами",
+    "addSource": "Додати джерело",
+    "addNewSource": "Додати нове джерело",
+    "personalInfo": "Особиста інформація",
+    "parsingSettings": "Налаштування парсингу",
+    "parsingSettingsDescription": "Моделі Vision та OCR використовуються разом для покращення ефективності парсингу.",
+    "visionModel": "Модель Vision",
+    "visionModelDescription": "Можна використовувати лише моделі з можливостями комп'ютерного зору.",
+    "documentModel": "Модель документів",
+    "documentModelDescription": "Docling - це модель парсингу з відкритим кодом, що працює локально.",
+    "documentModelDoclingGithub": "Github",
+    "documentModelUpstage": "Upstage",
+    "documentModelUpstageDescription": "Upstage показав найкращу продуктивність у наших тестах.",
+    "documentModelUpstageDescription2": "пропонує $10 безкоштовних кредитів для нових реєстрацій, карта не потрібна.",
+    "name": "Ім'я",
+    "birthdate": "Дата народження",
+    "height": "Зріст",
+    "weight": "Вага",
+    "bloodType": "Група крові",
+    "familyHistory": "Сімейна історія",
+    "select": "Вибрати",
+    "extractedData": "Витягнуті дані",
+    "update": "Оновити",
+    "uploadFiles": "Завантажити файли",
+    "uploadFilesDescription": "Додати зображення або PDF файли.",
+    "uploadSymptoms": "Нові симптоми",
+    "uploadSymptomsDescription": "Записати сьогоднішні симптоми.",
+    "date": "Дата",
+    "endDate": "Дата закінчення",
+    "description": "Опис",
+    "symptoms": "Симптоми",
+    "selectModel": "Вибрати модель",
+    "apiKey": "API ключ",
+    "enterYourAPIKey": "Введіть ваш API ключ",
+    "enterYourAPIUrl": "Введіть вашу API URL"
+  },
+  "DynamicForm": {
+    "selectPlaceholder": "Виберіть..."
+  },
+  "LoginPage": {
+    "username": "Ім'я користувача",
+    "usernamePlaceholder": "Введіть ім'я користувача",
+    "password": "Пароль",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "Увійти",
+    "needSignUp": "Потрібен обліковий запис? Зареєструйтеся",
+    "alreadyHaveAccount": "Вже є обліковий запис? Увійдіть",
+    "signUp": "Створити обліковий запис"
+  },
+  "Onboarding": {
+    "introduction": {
+      "title": "Health Solver",
+      "subtitle": "by OpenHealth",
+      "description": "Маєте невирішені проблеми зі здоров'ям?\nДозвольте ШІ глибоко проаналізувати ваші дані",
+      "privacyNotice": "Ваші зібрані дані будуть використовуватися лише для вирішення ваших проблем зі здоров'ям.",
+      "runLocally": "Ви можете запустити локально",
+      "here": "тут"
+    },
+    "healthConcerns": {
+      "title": "Проблеми зі Здоров'ям",
+      "description": "Будь ласка, детально опишіть ваші поточні проблеми зі здоров'ям",
+      "placeholder": "Приклад: \n- Які симптоми ви відчуваєте?\n- Коли вони почалися?\n- Що погіршує симптоми?\n- Чи були у вас подібні симптоми раніше?",
+      "error": "Будь ласка, опишіть ваші проблеми зі здоров'ям"
+    },
+    "personalInfo": {
+      "title": "Особиста Інформація",
+      "description": "Допоможіть нам краще зрозуміти ваш профіль",
+      "gender": {
+        "label": "Стать",
+        "male": "Чоловіча",
+        "female": "Жіноча",
+        "error": "Будь ласка, виберіть вашу стать"
+      },
+      "birthDate": {
+        "label": "Дата Народження",
+        "error": "Будь ласка, введіть вашу дату народження"
+      },
+      "height": {
+        "label": "Зріст",
+        "placeholder": {
+          "cm": "170",
+          "ft": "5.6"
+        },
+        "error": "Будь ласка, введіть ваш зріст"
+      },
+      "weight": {
+        "label": "Вага",
+        "placeholder": {
+          "kg": "65",
+          "lb": "143"
+        },
+        "error": "Будь ласка, введіть вашу вагу"
+      },
+      "ethnicity": {
+        "label": "Етнічна Приналежність",
+        "placeholder": "Виберіть вашу етнічну приналежність",
+        "options": {
+          "east_asian": "Східноазійська",
+          "southeast_asian": "Південно-східноазійська",
+          "south_asian": "Південноазійська",
+          "european": "Європейська",
+          "middle_eastern": "Близький Схід/Північна Африка",
+          "african": "Африканська",
+          "african_american": "Афроамериканська",
+          "pacific_islander": "Житель Тихоокеанських островів",
+          "native_american": "Корінний американець",
+          "hispanic": "Іспаномовна/Латиноамериканська",
+          "mixed": "Змішана етнічність",
+          "other": "Інша"
+        },
+        "error": "Будь ласка, виберіть вашу етнічну приналежність"
+      },
+      "country": {
+        "label": "Країна",
+        "placeholder": "Введіть назву вашої країни",
+        "error": "Будь ласка, виберіть вашу країну"
+      }
+    },
+    "medicalRecords": {
+      "title": "Медичні Записи",
+      "description": "Завантажте ваші медичні записи для кращого аналізу (Необов'язково)",
+      "dragDrop": {
+        "title": "Перетягніть ваші файли сюди",
+        "or": "або",
+        "browse": "Вибрати Файли",
+        "supportedFormats": "Підтримувані формати: PDF, JPEG, PNG, DOC"
+      }
+    },
+    "analysis": {
+      "description": "ШІ аналізує ваші дані про здоров'я, щоб зрозуміти ваш стан\nта надати персоналізовані рекомендації щодо здоров'я"
+    },
+    "navigation": {
+      "back": "Назад",
+      "next": "Далі",
+      "skip": "Пропустити"
+    },
+    "healthSolver": {
+      "message": "Розкажіть про свої проблеми зі здоров'ям"
+    }
+  }
+} 

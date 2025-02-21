@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
+import {useTranslations} from "next-intl";
 
 interface Field {
     key: string;
@@ -18,6 +19,7 @@ interface DynamicFormProps {
 }
 
 export default function DynamicForm({fields, data, onChange}: DynamicFormProps) {
+    const t = useTranslations('DynamicForm')
     return (
         <div className="space-y-4">
             {fields.map((field) => (
@@ -35,7 +37,7 @@ export default function DynamicForm({fields, data, onChange}: DynamicFormProps) 
                             value={data[field.key] || field.defaultValue || ''}
                             onChange={(e) => onChange(field.key, e.target.value)}
                         >
-                            <option value="">Select...</option>
+                            <option value="">{t('selectPlaceholder')}</option>
                             {field.options?.map(option => (
                                 <option key={option.value} value={option.value}>
                                     {option.label}

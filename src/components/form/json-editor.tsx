@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Button} from "@/components/ui/button";
 import {Save} from "lucide-react";
+import {useTranslations} from "next-intl";
 
 interface JSONEditorProps {
     data: Record<string, unknown>;
@@ -9,6 +10,7 @@ interface JSONEditorProps {
 }
 
 export default function JSONEditor({data, onSave, isEditable = false}: JSONEditorProps) {
+    const t = useTranslations('SourceManagement')
     const [editableData, setEditableData] = useState(JSON.stringify(data, null, 2));
 
     const handleSave = () => {
@@ -23,7 +25,7 @@ export default function JSONEditor({data, onSave, isEditable = false}: JSONEdito
     if (!isEditable) {
         return (
             <div className="h-full">
-                <h3 className="text-base font-semibold mb-2.5 text-gray-800">Extracted Data</h3>
+                <h3 className="text-base font-semibold mb-2.5 text-gray-800">{t('extractedData')}</h3>
                 <pre className="text-sm font-mono bg-muted/30 p-4 rounded h-full whitespace-pre-wrap break-all">
                     {JSON.stringify(data, null, 2)}
                 </pre>
@@ -33,11 +35,11 @@ export default function JSONEditor({data, onSave, isEditable = false}: JSONEdito
 
     return (
         <div className="h-full flex flex-col">
-            <h3 className="text-base font-semibold mb-2.5 text-gray-800">Extracted Data</h3>
+            <h3 className="text-base font-semibold mb-2.5 text-gray-800">{t('extractedData')}</h3>
             <div className="flex justify-end mb-2">
                 <Button size="sm" onClick={handleSave}>
                     <Save className="w-4 h-4 mr-2"/>
-                    Update
+                    {t('update')}
                 </Button>
             </div>
             <textarea

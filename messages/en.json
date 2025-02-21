@@ -1,0 +1,179 @@
+{
+  "HomePage": {
+  },
+  "Chat": {
+    "inputPlaceholder": "Type your message..."
+  },
+  "Feedback": {
+    "helpMessage": "Help OpenHealth solve health problems for you and many others",
+    "shareFeedback": "Share Feedback"
+  },
+  "ChatSideBar": {
+    "sources": "Sources",
+    "numberOfFiles": "{value, number} files",
+    "countOfTokens": "{value, number} tokens",
+    "viewAggregatedSources": "View aggregated sources",
+    "aggregatedSources": "Aggregated Sources",
+    "manageSources": "Manage Sources",
+    "newChat": "New Chat",
+    "copy": "Copy",
+    "download": "Download",
+    "chatDeleteTitle": "Delete Chat",
+    "chatDeleteMessage": "Are you sure you want to delete this chat?",
+    "chatDeleteMessageDetail": "This action cannot be undone.",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "ChatSettingSideBar": {
+    "modelSettings": "Model Settings",
+    "systemPrompt": "System Prompt",
+    "assistantMode": "Assistant Mode",
+    "selectModel": "Select Model",
+    "selectCompany": "Select Company",
+    "noModelsFound": "No models found.",
+    "enterApiKey": "Enter API Key",
+    "show": "Show",
+    "hide": "Hide"
+  },
+  "SourceManagement": {
+    "title": "Source Management",
+    "addSource": "Add Source",
+    "addNewSource": "Add New Source",
+    "personalInfo": "Personal Info",
+    "parsingSettings": "Parsing Settings",
+    "parsingSettingsDescription": "Vision and OCR models are used together to enhance parsing performance.",
+    "visionModel": "Vision Model",
+    "visionModelDescription": "Only models with vision capabilities can be used.",
+    "documentModel": "Document Model",
+    "documentModelDescription": "Docling is an open-source parsing model that runs locally.",
+    "documentModelDoclingGithub": "Github",
+    "documentModelUpstage": "Upstage",
+    "documentModelUpstageDescription": "Upstage showed the best performance in our tests.",
+    "documentModelUpstageDescription2": "offers $10 free credit for new sign-ups, no card required.",
+    "name": "Name",
+    "birthdate": "Birthdate",
+    "height": "Height",
+    "weight": "Weight",
+    "bloodType": "Blood Type",
+    "familyHistory": "Family History",
+    "select": "Select",
+    "extractedData": "Extracted Data",
+    "update": "Update",
+    "uploadFiles": "Upload Files",
+    "uploadFilesDescription": "Add images or PDF files.",
+    "uploadSymptoms": "New Symptoms",
+    "uploadSymptomsDescription": "Record today's symptoms.",
+    "date": "Date",
+    "endDate": "End Date",
+    "description": "Description",
+    "symptoms": "Symptoms",
+    "selectModel": "Select Model",
+    "apiKey": "API Key",
+    "enterYourAPIKey": "Enter your API key",
+    "enterYourAPIUrl": "Enter your API URL"
+  },
+  "DynamicForm": {
+    "selectPlaceholder": "Select..."
+  },
+  "LoginPage": {
+    "username": "Username",
+    "usernamePlaceholder": "Enter your username",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "Sign In",
+    "needSignUp": "Need an account? Sign up",
+    "alreadyHaveAccount": "Already have an account? Sign in",
+    "signUp": "Create account"
+  },
+  "Onboarding": {
+    "introduction": {
+      "title": "Health Solver",
+      "subtitle": "by OpenHealth",
+      "description": "Having health issues that remain unsolved?\nLet AI deep dive into your data",
+      "privacyNotice": "Your data collected will only be used to solve your health issues.",
+      "runLocally": "You can run locally",
+      "here": "here"
+    },
+    "healthConcerns": {
+      "title": "Health Concerns",
+      "description": "Please describe your current health issues in detail",
+      "placeholder": "Example: \n- What symptoms are you experiencing?\n- When did they start?\n- What makes the symptoms worse?\n- Have you experienced similar symptoms before?",
+      "error": "Please describe your health concerns"
+    },
+    "personalInfo": {
+      "title": "Personal Information",
+      "description": "Help us understand your profile better",
+      "gender": {
+        "label": "Gender",
+        "male": "Male",
+        "female": "Female",
+        "error": "Please select your gender"
+      },
+      "birthDate": {
+        "label": "Birth Date",
+        "error": "Please enter your birth date"
+      },
+      "height": {
+        "label": "Height",
+        "placeholder": {
+          "cm": "170",
+          "ft": "5.6"
+        },
+        "error": "Please enter your height"
+      },
+      "weight": {
+        "label": "Weight",
+        "placeholder": {
+          "kg": "65",
+          "lb": "143"
+        },
+        "error": "Please enter your weight"
+      },
+      "ethnicity": {
+        "label": "Ethnicity",
+        "placeholder": "Select your ethnicity",
+        "options": {
+          "east_asian": "East Asian",
+          "southeast_asian": "Southeast Asian",
+          "south_asian": "South Asian",
+          "european": "European",
+          "middle_eastern": "Middle Eastern/North African",
+          "african": "African",
+          "african_american": "African American",
+          "pacific_islander": "Pacific Islander",
+          "native_american": "Native American/Indigenous",
+          "hispanic": "Hispanic/Latino",
+          "mixed": "Mixed Ethnicity",
+          "other": "Other"
+        },
+        "error": "Please select your ethnicity"
+      },
+      "country": {
+        "label": "Country",
+        "placeholder": "Type your country name",
+        "error": "Please select your country"
+      }
+    },
+    "medicalRecords": {
+      "title": "Medical Records",
+      "description": "Upload your medical records for better analysis (Optional)",
+      "dragDrop": {
+        "title": "Drag and drop your files here",
+        "or": "or",
+        "browse": "Browse Files",
+        "supportedFormats": "Supported formats: PDF, JPEG, PNG, DOC"
+      }
+    },
+    "analysis": {
+      "description": "AI is analyzing your health data to understand your condition\nand provide personalized health insights"
+    },
+    "navigation": {
+      "back": "Back",
+      "next": "Next",
+      "skip": "Skip"
+    },
+    "healthSolver": {
+      "message": "Tell me about my health issues"
+    }
+  }
+}

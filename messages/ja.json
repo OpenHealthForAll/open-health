@@ -1,0 +1,179 @@
+{
+  "HomePage": {
+  },
+  "Chat": {
+    "inputPlaceholder": "メッセージを入力してください..."
+  },
+  "Feedback": {
+    "helpMessage": "OpenHealthを支援して、あなたと多くの人々の健康問題を解決できるようにご協力ください",
+    "shareFeedback": "フィードバックを送る"
+  },
+  "ChatSideBar": {
+    "sources": "ソース",
+    "numberOfFiles": "ファイル数: {value, number}",
+    "countOfTokens": "トークン数: {value, number}",
+    "viewAggregatedSources": "集計されたソースを表示",
+    "aggregatedSources": "集計されたソース",
+    "manageSources": "ソース管理",
+    "newChat": "新規チャット",
+    "copy": "コピー",
+    "download": "ダウンロード",
+    "chatDeleteTitle": "チャットを削除",
+    "chatDeleteMessage": "このチャットを削除してもよろしいですか？",
+    "chatDeleteMessageDetail": "この操作は取り消すことができません。",
+    "cancel": "キャンセル",
+    "delete": "削除"
+  },
+  "ChatSettingSideBar": {
+    "modelSettings": "モデル設定",
+    "systemPrompt": "システムプロンプト",
+    "assistantMode": "アシスタントモード",
+    "selectModel": "モデルを選択",
+    "selectCompany": "企業を選択",
+    "noModelsFound": "モデルが見つかりません。",
+    "enterApiKey": "APIキーを入力",
+    "show": "表示",
+    "hide": "非表示"
+  },
+  "SourceManagement": {
+    "title": "ソース管理",
+    "addSource": "ソースを追加",
+    "addNewSource": "新規ソースを追加",
+    "personalInfo": "個人情報",
+    "parsingSettings": "解析設定",
+    "parsingSettingsDescription": "VisionモデルとOCRモデルを組み合わせて解析性能を向上させています。",
+    "visionModel": "Visionモデル",
+    "visionModelDescription": "ビジョン機能を持つモデルのみ使用可能です。",
+    "documentModel": "ドキュメントモデル",
+    "documentModelDescription": "Doclingはローカルで動作するオープンソースの解析モデルです。",
+    "documentModelDoclingGithub": "Github",
+    "documentModelUpstage": "Upstage",
+    "documentModelUpstageDescription": "Upstageは当社のテストで最高のパフォーマンスを示しました。",
+    "documentModelUpstageDescription2": "新規登録で$10の無料クレジットを提供、カード不要。",
+    "name": "名前",
+    "birthdate": "生年月日",
+    "height": "身長",
+    "weight": "体重",
+    "bloodType": "血液型",
+    "familyHistory": "家族歴",
+    "select": "選択",
+    "extractedData": "抽出データ",
+    "update": "更新",
+    "uploadFiles": "ファイルをアップロード",
+    "uploadFilesDescription": "画像またはPDFファイルを追加。",
+    "uploadSymptoms": "新規症状",
+    "uploadSymptomsDescription": "今日の症状を記録。",
+    "date": "日付",
+    "endDate": "終了日",
+    "description": "説明",
+    "symptoms": "症状",
+    "selectModel": "モデルを選択",
+    "apiKey": "APIキー",
+    "enterYourAPIKey": "APIキーを入力してください",
+    "enterYourAPIUrl": "API URLを入力してください"
+  },
+  "DynamicForm": {
+    "selectPlaceholder": "選択してください..."
+  },
+  "LoginPage": {
+    "username": "ユーザー名",
+    "usernamePlaceholder": "ユーザー名を入力",
+    "password": "パスワード",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "ログイン",
+    "needSignUp": "アカウントが必要ですか？新規登録",
+    "alreadyHaveAccount": "すでにアカウントをお持ちですか？ログイン",
+    "signUp": "アカウント作成"
+  },
+  "Onboarding": {
+    "introduction": {
+      "title": "Health Solver",
+      "subtitle": "by OpenHealth",
+      "description": "未解決の健康問題をお持ちですか？\nAIがあなたのデータを深く分析します",
+      "privacyNotice": "収集されたデータは、あなたの健康問題の解決にのみ使用されます。",
+      "runLocally": "ローカルで実行できます",
+      "here": "こちら"
+    },
+    "healthConcerns": {
+      "title": "健康上の問題",
+      "description": "現在の健康上の問題を詳しく説明してください",
+      "placeholder": "例：\n- どのような症状がありますか？\n- いつから始まりましたか？\n- 何が症状を悪化させますか？\n- 以前に同様の症状を経験したことがありますか？",
+      "error": "健康上の問題を説明してください"
+    },
+    "personalInfo": {
+      "title": "個人情報",
+      "description": "あなたのプロフィールをより良く理解するのに役立ちます",
+      "gender": {
+        "label": "性別",
+        "male": "男性",
+        "female": "女性",
+        "error": "性別を選択してください"
+      },
+      "birthDate": {
+        "label": "生年月日",
+        "error": "生年月日を入力してください"
+      },
+      "height": {
+        "label": "身長",
+        "placeholder": {
+          "cm": "170",
+          "ft": "5.6"
+        },
+        "error": "身長を入力してください"
+      },
+      "weight": {
+        "label": "体重",
+        "placeholder": {
+          "kg": "65",
+          "lb": "143"
+        },
+        "error": "体重を入力してください"
+      },
+      "ethnicity": {
+        "label": "民族",
+        "placeholder": "民族を選択してください",
+        "options": {
+          "east_asian": "東アジア",
+          "southeast_asian": "東南アジア",
+          "south_asian": "南アジア",
+          "european": "ヨーロッパ",
+          "middle_eastern": "中東/北アフリカ",
+          "african": "アフリカ",
+          "african_american": "アフリカ系アメリカ人",
+          "pacific_islander": "太平洋諸島",
+          "native_american": "ネイティブアメリカン",
+          "hispanic": "ヒスパニック/ラテン",
+          "mixed": "混血",
+          "other": "その他"
+        },
+        "error": "民族を選択してください"
+      },
+      "country": {
+        "label": "国",
+        "placeholder": "国名を入力してください",
+        "error": "国を選択してください"
+      }
+    },
+    "medicalRecords": {
+      "title": "医療記録",
+      "description": "より良い分析のために医療記録をアップロードしてください（任意）",
+      "dragDrop": {
+        "title": "ファイルをここにドラッグ＆ドロップ",
+        "or": "または",
+        "browse": "ファイルを参照",
+        "supportedFormats": "対応フォーマット：PDF、JPEG、PNG、DOC"
+      }
+    },
+    "analysis": {
+      "description": "AIがあなたの健康データを分析して状態を理解し、\nパーソナライズされた健康に関する洞察を提供します"
+    },
+    "navigation": {
+      "back": "戻る",
+      "next": "次へ",
+      "skip": "スキップ"
+    },
+    "healthSolver": {
+      "message": "私の健康問題について教えてください"
+    }
+  }
+} 

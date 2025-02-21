@@ -1,6 +1,6 @@
 # 🚀 **OpenHealth**
 
-**Asistente de Salud con IA | Impulsado por tus datos, Ejecutado localmente**
+**Asistente de Salud con IA | Impulsado por tus datos**
 
 <div align="center">
 
@@ -28,7 +28,7 @@
 ## 🌟 Descripción General
 
 > OpenHealth le ayuda a **tomar el control de sus datos de salud**. Aprovechando la IA y su información personal de salud,
-> OpenHealth proporciona un asistente privado y de ejecución local que le ayuda a comprender y gestionar mejor su salud.
+> OpenHealth proporciona un asistente privado que le ayuda a comprender y gestionar mejor su salud. Puede ejecutarlo completamente de forma local para máxima privacidad.
 
 ## ✨ Características del Proyecto
 
@@ -133,23 +133,24 @@ Entrada de datos de salud --> Módulo de análisis --> Archivos de datos estruct
    # Copiar el archivo de entorno
    cp .env.example .env
 
-   # Agregar claves API al archivo .env:
-   # UPSTAGE_API_KEY - Para el análisis (Obtenga $10 de crédito sin registro de tarjeta en https://www.upstage.ai)
-   # OPENAI_API_KEY - Para capacidades mejoradas de análisis
-
    # Iniciar la aplicación con Docker Compose
    docker compose --env-file .env up
    ```
 
    Para usuarios existentes:
    ```bash
+   # Generar ENCRYPTION_KEY para el archivo .env:
+   # Ejecute el siguiente comando y agregue la salida a ENCRYPTION_KEY en .env
+   echo $(head -c 32 /dev/urandom | base64)
+
+   # Reconstruir e iniciar la aplicación
    docker compose --env-file .env up --build
    ```
 
 3. **Acceder a OpenHealth:**
    Abra su navegador y vaya a `http://localhost:3000` para comenzar a usar OpenHealth.
 
-> **Nota:** El sistema consta de dos componentes principales: análisis y LLM. Actualmente, el análisis utiliza las API de Upstage y OpenAI (que mostraron el mejor rendimiento en nuestras pruebas), con un analizador local próximamente, mientras que el componente LLM puede ejecutarse completamente de forma local usando Ollama.
+> **Nota:** El sistema consta de dos componentes principales: análisis y LLM. Para el análisis, puede usar docling para una ejecución completamente local, mientras que el componente LLM puede ejecutarse completamente de forma local usando Ollama.
 
 > **Nota:** Si está usando Ollama con Docker, asegúrese de configurar el punto final de la API de Ollama como: `http://docker.for.mac.localhost:11434` para Mac o `http://host.docker.internal:11434` para Windows.
 
