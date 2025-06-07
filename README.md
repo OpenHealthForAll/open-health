@@ -134,7 +134,8 @@ graph LR
    cp .env.example .env
 
    # Start the application using Docker/Podman Compose
-   docker/podman compose --env-file .env up
+   Docker: docker compose --env-file .env up
+   Podman: podman compose --env-file .env up
    ```
 
    For existing users, use:
