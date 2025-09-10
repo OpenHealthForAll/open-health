@@ -4,7 +4,7 @@ import Negotiator from 'negotiator'
 import deepmerge from 'deepmerge';
 
 export default getRequestConfig(async () => {
-    const availableLanguages = ['ko', 'en', 'ru', 'uk', 'de', 'fr', 'es', 'ja', 'zh', 'ur'];
+    const availableLanguages = ['ko', 'en', 'ru', 'uk', 'de', 'fr', 'es', 'ja', 'zh', 'ur', 'tr'];
     const acceptLanguage = (await headers()).get('accept-language');
     const negotiator = new Negotiator({headers: {'accept-language': acceptLanguage || ''}});
     const locale = negotiator.language(availableLanguages) || 'en';
