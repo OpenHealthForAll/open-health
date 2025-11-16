@@ -12,6 +12,7 @@ import FormData from 'form-data'
 import {currentDeploymentEnv} from "@/lib/current-deployment-env";
 
 const DOCLING_URL = process.env.DOCLING_URL || 'http://docling-serve:5001';
+const REQUEST_TIMEOUT_MS = 300000; // 5 minutes timeout for failure detection on multiple serial uploads
 
 export class DoclingDocumentParser extends BaseDocumentParser {
     get apiKeyRequired(): boolean {
@@ -33,6 +34,28 @@ export class DoclingDocumentParser extends BaseDocumentParser {
         ];
     }
 
+    private createFormData(fileBuffer: Buffer, filename: string, options: {
+        forceOcr?: boolean;
+        toFormat?: 'json' | 'md';
+    } = {}): FormData {
+        const formData = new FormData();
+        formData.append('ocr_engine', 'easyocr');
+        formData.append('pdf_backend', 'dlparse_v2');
+        formData.append('from_formats', 'pdf');
+        formData.append('from_formats', 'docx');
+        formData.append('from_formats', 'image');
+        formData.append('force_ocr', options.forceOcr ? 'true' : 'false');
+        formData.append('image_export_mode', 'placeholder');
+        formData.append('ocr_lang', 'en');
+        formData.append('table_mode', 'fast');
+        formData.append('files', fileBuffer, {filename: filename});
+        formData.append('abort_on_error', 'false');
+        formData.append('to_formats', options.toFormat || 'json');
+        formData.append('return_as_file', 'false');
+        formData.append('do_ocr', options.forceOcr ? 'true' : 'false');
+        return formData;
+    }
+
     async ocr(options: DocumentOCROptions): Promise<OCRParseResult> {
         try {
             console.log('[Docling OCR] Starting OCR for file:', options.input);
@@ -50,21 +73,10 @@ export class DoclingDocumentParser extends BaseDocumentParser {
             const filename = urlPath.split('/').pop() || 'document.pdf';
             console.log('[Docling OCR] Using filename:', filename);
 
-            const formData = new FormData();
-            formData.append('ocr_engine', 'easyocr');
-            formData.append('pdf_backend', 'dlparse_v2');
-            formData.append('from_formats', 'pdf');
-            formData.append('from_formats', 'docx');
-            formData.append('from_formats', 'image');
-            formData.append('force_ocr', 'false');
-            formData.append('image_export_mode', 'placeholder');
-            formData.append('ocr_lang', 'en');
-            formData.append('table_mode', 'fast');
-            formData.append('files', fileBuffer, {filename: filename});
-            formData.append('abort_on_error', 'false');
-            formData.append('to_formats', 'json');
-            formData.append('return_as_file', 'false');
-            formData.append('do_ocr', 'true');
+            const formData = this.createFormData(fileBuffer, filename, {
+                forceOcr: true,
+                toFormat: 'json'
+            });
 
             console.log('[Docling OCR] Sending request to', DOCLING_URL);
 
@@ -74,7 +86,7 @@ export class DoclingDocumentParser extends BaseDocumentParser {
                     body: formData
                 }),
                 new Promise((_, reject) =>
-                    setTimeout(() => reject(new Error('Docling request timeout after 5 minutes')), 300000)
+                    setTimeout(() => reject(new Error(`Docling request timeout after ${REQUEST_TIMEOUT_MS / 1000} seconds`)), REQUEST_TIMEOUT_MS)
                 )
             ]) as Response;
 
@@ -117,21 +129,12 @@ export class DoclingDocumentParser extends BaseDocumentParser {
             const filename = urlPath.split('/').pop() || 'document.pdf';
             console.log('[Docling Parse] Using filename:', filename);
 
-            const formData = new FormData();
-            formData.append('ocr_engine', 'easyocr');
-            formData.append('pdf_backend', 'dlparse_v2');
-            formData.append('from_formats', 'pdf');
-            formData.append('from_formats', 'docx');
-            formData.append('from_formats', 'image');
-            formData.append('force_ocr', 'true');
-            formData.append('image_export_mode', 'placeholder');
-            formData.append('ocr_lang', 'en');
-            formData.append('table_mode', 'fast');
-            formData.append('files', fileBuffer, {filename: filename});
-            formData.append('abort_on_error', 'false');
-            formData.append('to_formats', 'md');
-            formData.append('return_as_file', 'false');
-            formData.append('do_ocr', 'true');
+            // Optimization: Try without OCR first for faster processing
+            // If the PDF has selectable text, this will be much faster
+            const formData = this.createFormData(fileBuffer, filename, {
+                forceOcr: false,
+                toFormat: 'md'
+            });
 
             console.log('[Docling Parse] Sending request to', DOCLING_URL);
 
@@ -141,7 +144,7 @@ export class DoclingDocumentParser extends BaseDocumentParser {
                     body: formData
                 }),
                 new Promise((_, reject) =>
-                    setTimeout(() => reject(new Error('Docling request timeout after 5 minutes')), 300000)
+                    setTimeout(() => reject(new Error(`Docling request timeout after ${REQUEST_TIMEOUT_MS / 1000} seconds`)), REQUEST_TIMEOUT_MS)
                 )
             ]) as Response;
 
