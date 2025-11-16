@@ -201,6 +201,8 @@ const AddSourceDialog: React.FC<AddSourceDialogProps> = ({
     const [open, setOpen] = useState(false);
     const [showSettingsAlert, setShowSettingsAlert] = useState(false);
     const [uploadStatus, setUploadStatus] = useState<string>('');
+    const [isDragOver, setIsDragOver] = useState(false);
+    const fileInputRef = React.useRef<HTMLInputElement>(null);
 
     const handleFileUpload = async (e: ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files?.length) return;
@@ -219,6 +221,30 @@ const AddSourceDialog: React.FC<AddSourceDialogProps> = ({
             setShowSettingsAlert(true);
         } finally {
             setUploadStatus('');
+        }
+    };
+
+    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsDragOver(true);
+    };
+
+    const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsDragOver(false);
+    };
+
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsDragOver(false);
+
+        if (fileInputRef.current && e.dataTransfer.files) {
+            fileInputRef.current.files = e.dataTransfer.files;
+            const event = new Event('change', { bubbles: true });
+            fileInputRef.current.dispatchEvent(event);
         }
     };
 
@@ -242,24 +268,33 @@ const AddSourceDialog: React.FC<AddSourceDialogProps> = ({
                         <DialogTitle>{t('addNewSource')}</DialogTitle>
                     </DialogHeader>
                     <div className="flex flex-col gap-4 min-w-[300px]">
-                        <label
-                            htmlFor="file-upload"
+                        <div
+                            onDragOver={handleDragOver}
+                            onDragLeave={handleDragLeave}
+                            onDrop={handleDrop}
                             className={cn(
-                                "flex items-center gap-4 p-4 border rounded-lg cursor-pointer hover:bg-gray-50",
+                                "flex items-center gap-4 p-4 border-2 border-dashed rounded-lg cursor-pointer transition-colors",
+                                isDragOver ? "border-primary bg-primary/5" : "border-gray-300 hover:bg-gray-50",
                                 uploadStatus === 'uploading' && "opacity-50 cursor-not-allowed"
                             )}
                         >
-                            {uploadStatus === 'uploading' ? (
-                                <Loader2 className="h-6 w-6 text-gray-500 animate-spin"/>
-                            ) : (
-                                <FileText className="w-6 h-6 text-gray-500"/>
-                            )}
-                            <div className="flex-1">
-                                <h3 className="font-medium">{t('uploadFiles')}</h3>
-                                <p className="text-sm text-gray-500">{t('uploadFilesDescription')}</p>
-                            </div>
-                        </label>
+                            <label
+                                htmlFor="file-upload"
+                                className="flex items-center gap-4 flex-1 cursor-pointer"
+                            >
+                                {uploadStatus === 'uploading' ? (
+                                    <Loader2 className="h-6 w-6 text-gray-500 animate-spin flex-shrink-0"/>
+                                ) : (
+                                    <FileText className="w-6 h-6 text-gray-500 flex-shrink-0"/>
+                                )}
+                                <div className="flex-1">
+                                    <h3 className="font-medium">{t('uploadFiles')}</h3>
+                                    <p className="text-sm text-gray-500">{t('uploadFilesDescription')}</p>
+                                </div>
+                            </label>
+                        </div>
                         <input
+                            ref={fileInputRef}
                             type="file"
                             id="file-upload"
                             multiple
@@ -1208,28 +1243,28 @@ export default function SourceAddScreen() {
                 <h1 className="text-base font-semibold">{t('title')}</h1>
             </div>
             <div className="flex flex-1 overflow-hidden">
-                <div className="w-80 border-r flex flex-col">
-                    <div className="p-4 flex flex-col gap-4">
+                <div className="w-80 border-r flex flex-col min-h-0">
+                    <div className="p-4 flex flex-col gap-4 flex-shrink-0">
                         <AddSourceDialog
                             isSetUpVisionParser={visionParser !== undefined && visionParserModel !== undefined && (!visionParserApiKeyRequired || visionParserApiKey.length > 0)}
                             isSetUpDocumentParser={documentParser !== undefined && documentParserModel !== undefined && (!documentParserApiKeyRequired || documentParserApiKey.length > 0)}
                             onFileUpload={handleFileUpload}
                             onAddSymptoms={handleAddSymptoms}/>
-                        <div className="flex-1 overflow-y-auto">
-                            {healthDataList?.healthDataList?.map((item) => (
-                                <HealthDataItem
-                                    key={item.id}
-                                    healthData={item}
-                                    isSelected={selectedId === item.id}
-                                    onClick={() => {
-                                        if (item.status === 'PARSING') return;
-                                        setSelectedId(item.id)
-                                        setFormData(item.data as Record<string, any>)
-                                    }}
-                                    onDelete={handleDeleteSource}
-                                />
-                            ))}
-                        </div>
+                    </div>
+                    <div className="flex-1 overflow-y-auto min-h-0 px-4">
+                        {healthDataList?.healthDataList?.map((item) => (
+                            <HealthDataItem
+                                key={item.id}
+                                healthData={item}
+                                isSelected={selectedId === item.id}
+                                onClick={() => {
+                                    if (item.status === 'PARSING') return;
+                                    setSelectedId(item.id)
+                                    setFormData(item.data as Record<string, any>)
+                                }}
+                                onDelete={handleDeleteSource}
+                            />
+                        ))}
                     </div>
                 </div>
 
