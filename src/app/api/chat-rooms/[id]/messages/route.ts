@@ -1,7 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 import prisma, {Prisma} from "@/lib/prisma";
 import {auth} from "@/auth";
-import {decrypt} from "@/lib/encryption";
 import {currentDeploymentEnv} from "@/lib/current-deployment-env";
 import {ChatOpenAI} from "@langchain/openai";
 import {ChatAnthropic} from "@langchain/anthropic";
@@ -90,7 +89,7 @@ export async function POST(
 
     let apiKey: string
     if (currentDeploymentEnv === 'local') {
-        apiKey = decrypt(llmProvider.apiKey)
+        apiKey = llmProvider.apiKey
     } else if (currentDeploymentEnv === 'cloud') {
         switch (llmProvider.providerId) {
             case 'openai':

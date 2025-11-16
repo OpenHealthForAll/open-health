@@ -11,7 +11,8 @@ export class OpenAIVisionParser extends BaseVisionParser {
     }
 
     get apiKeyRequired(): boolean {
-        return currentDeploymentEnv === 'local'
+        // Only require API key if we're in local environment AND no key is provided in .env
+        return currentDeploymentEnv === 'local' && !process.env.OPENAI_API_KEY
     }
 
     get enabled(): boolean {
@@ -33,9 +34,14 @@ export class OpenAIVisionParser extends BaseVisionParser {
     }
 
     async parse(options: VisionParseOptions) {
+        // Use environment variable if available, otherwise use provided API key
+        const apiKey = process.env.OPENAI_API_KEY || options.apiKey;
+        if (!apiKey) {
+            throw new Error('OpenAI API key is required but not provided');
+        }
         const llm = new ChatOpenAI({
             model: options.model.id,
-            apiKey: currentDeploymentEnv === 'cloud' ? process.env.OPENAI_API_KEY : options.apiKey
+            apiKey: apiKey
         })
         const messages = options.messages || ChatPromptTemplate.fromMessages([]);
         const chain = messages.pipe(llm.withStructuredOutput(HealthCheckupSchema, {

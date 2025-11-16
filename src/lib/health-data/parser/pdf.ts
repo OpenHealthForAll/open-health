@@ -277,7 +277,7 @@ export async function parseHealthData(options: SourceParseOptions) {
     const visionParser = options.visionParser || {
         parser: 'OpenAI',
         model: 'gpt-4o',
-        apiKey: process.env.OPENAI_API as string
+        apiKey: process.env.OPENAI_API_KEY as string
     }
 
     // Document Parser

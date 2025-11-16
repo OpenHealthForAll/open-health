@@ -2,7 +2,6 @@ import {NextRequest, NextResponse} from "next/server";
 import prisma from "@/lib/prisma";
 import OpenAI from "openai";
 import Anthropic from "@anthropic-ai/sdk";
-import {decrypt} from "@/lib/encryption";
 import {currentDeploymentEnv} from "@/lib/current-deployment-env";
 
 export interface LLMProviderModel {
@@ -22,13 +21,7 @@ export async function GET(
     const llmProvider = await prisma.lLMProvider.findUniqueOrThrow({
         where: {id}
     });
-    let apiKey: string
-    try {
-        apiKey = decrypt(llmProvider.apiKey)
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (e) {
-        apiKey = ''
-    }
+    let apiKey: string = llmProvider.apiKey
 
     if (llmProvider.providerId === 'openai') {
         if (currentDeploymentEnv === 'cloud') apiKey = process.env.OPENAI_API_KEY as string

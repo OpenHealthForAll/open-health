@@ -4,7 +4,7 @@ LABEL authors="OpenHealth"
 # Install coreutils for head
 RUN apk add coreutils
 
-RUN apk add -U graphicsmagick
+RUN apk add -U graphicsmagick ghostscript
 
 WORKDIR /app
 

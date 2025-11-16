@@ -14,6 +14,14 @@ services:
   docling-serve:
     image: ghcr.io/ds4sd/docling-serve:latest
     restart: always
+    ports:
+      - "5001:5001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   app:
     build:
@@ -22,8 +30,10 @@ services:
       args:
         - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database:5432/${POSTGRES_DB}
     depends_on:
-      - database
-      - docling-serve
+      database:
+        condition: service_started
+      docling-serve:
+        condition: service_started
     volumes:
       - app_data:/app/public/uploads
     ports:
@@ -31,6 +41,7 @@ services:
     restart: always
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database:5432/${POSTGRES_DB}
+      DOCLING_URL: http://docling-serve:5001
 
 volumes:
   postgres_data:
