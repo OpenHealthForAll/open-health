@@ -9,8 +9,9 @@ import {
 } from "@/lib/health-data/parser/document/base-document";
 import fetch from 'node-fetch'
 import FormData from 'form-data'
-import fs from 'node:fs'
 import {currentDeploymentEnv} from "@/lib/current-deployment-env";
+
+const DOCLING_URL = process.env.DOCLING_URL || 'http://docling-serve:5001';
 
 export class DoclingDocumentParser extends BaseDocumentParser {
     get apiKeyRequired(): boolean {
@@ -33,63 +34,121 @@ export class DoclingDocumentParser extends BaseDocumentParser {
     }
 
     async ocr(options: DocumentOCROptions): Promise<OCRParseResult> {
-        const formData = new FormData();
-        formData.append('ocr_engine', 'easyocr');
-        formData.append('pdf_backend', 'dlparse_v2');
-        formData.append('from_formats', 'pdf');
-        formData.append('from_formats', 'docx');
-        formData.append('from_formats', 'image');
-        formData.append('force_ocr', 'false');
-        formData.append('image_export_mode', 'placeholder');
-        formData.append('ocr_lang', 'en');
-        formData.append('ocr_lang', 'ko');
-        formData.append('table_mode', 'fast');
-        formData.append('files', fs.createReadStream(options.input));
-        formData.append('abort_on_error', 'false');
-        formData.append('to_formats', 'json');
-        formData.append('return_as_file', 'false');
-        formData.append('do_ocr', 'true');
+        try {
+            console.log('[Docling OCR] Starting OCR for file:', options.input);
 
-        const response = await fetch('http://docling-serve:5001/v1alpha/convert/file', {
-            method: 'POST',
-            headers: {'accept': 'application/json'},
-            body: formData
-        })
-        const data = await response.json()
-        const {document} = data
-        const {json_content} = document
+            // Fetch the file from the URL
+            const fileResponse = await fetch(options.input);
+            if (!fileResponse.ok) {
+                throw new Error(`Failed to fetch file: ${fileResponse.status} ${fileResponse.statusText}`);
+            }
+            const fileBuffer = await fileResponse.buffer();
 
-        const convertedJsonContent = this.convertJsonContent(json_content)
+            const formData = new FormData();
+            formData.append('ocr_engine', 'easyocr');
+            formData.append('pdf_backend', 'dlparse_v2');
+            formData.append('from_formats', 'pdf');
+            formData.append('from_formats', 'docx');
+            formData.append('from_formats', 'image');
+            formData.append('force_ocr', 'false');
+            formData.append('image_export_mode', 'placeholder');
+            formData.append('ocr_lang', 'en');
+            formData.append('ocr_lang', 'ko');
+            formData.append('table_mode', 'fast');
+            formData.append('files', fileBuffer, {filename: 'document'});
+            formData.append('abort_on_error', 'false');
+            formData.append('to_formats', 'json');
+            formData.append('return_as_file', 'false');
+            formData.append('do_ocr', 'true');
 
-        return {ocr: convertedJsonContent};
+            console.log('[Docling OCR] Sending request to', DOCLING_URL);
+
+            const response = await Promise.race([
+                fetch(`${DOCLING_URL}/v1alpha/convert/file`, {
+                    method: 'POST',
+                    headers: {'accept': 'application/json'},
+                    body: formData
+                }),
+                new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Docling request timeout after 5 minutes')), 300000)
+                )
+            ]) as Response;
+
+            console.log('[Docling OCR] Response received:', response.status);
+
+            if (!response.ok) {
+                throw new Error(`Docling service error: ${response.status} ${response.statusText}`)
+            }
+
+            const data = await response.json()
+            const {document} = data
+            const {json_content} = document
+
+            const convertedJsonContent = this.convertJsonContent(json_content)
+            console.log('[Docling OCR] OCR completed successfully');
+
+            return {ocr: convertedJsonContent};
+        } catch (error) {
+            console.error('[Docling OCR] Error:', error)
+            throw new Error(`Failed to perform OCR with Docling: ${error instanceof Error ? error.message : String(error)}`)
+        }
     }
 
     async parse(options: DocumentParseOptions): Promise<DocumentParseResult> {
-        const formData = new FormData();
-        formData.append('ocr_engine', 'easyocr');
-        formData.append('pdf_backend', 'dlparse_v2');
-        formData.append('from_formats', 'pdf');
-        formData.append('from_formats', 'docx');
-        formData.append('from_formats', 'image');
-        formData.append('force_ocr', 'true');
-        formData.append('image_export_mode', 'placeholder');
-        formData.append('ocr_lang', 'en');
-        formData.append('ocr_lang', 'ko');
-        formData.append('table_mode', 'fast');
-        formData.append('files', fs.createReadStream(options.input));
-        formData.append('abort_on_error', 'false');
-        formData.append('to_formats', 'md');
-        formData.append('return_as_file', 'false');
-        formData.append('do_ocr', 'true');
+        try {
+            console.log('[Docling Parse] Starting parse for file:', options.input);
 
-        const response = await fetch('http://docling-serve:5001/v1alpha/convert/file', {
-            method: 'POST',
-            headers: {'accept': 'application/json'},
-            body: formData
-        })
-        const {document} = await response.json()
-        const {md_content} = document
-        return {document: {content: {markdown: md_content}}};
+            // Fetch the file from the URL
+            const fileResponse = await fetch(options.input);
+            if (!fileResponse.ok) {
+                throw new Error(`Failed to fetch file: ${fileResponse.status} ${fileResponse.statusText}`);
+            }
+            const fileBuffer = await fileResponse.buffer();
+
+            const formData = new FormData();
+            formData.append('ocr_engine', 'easyocr');
+            formData.append('pdf_backend', 'dlparse_v2');
+            formData.append('from_formats', 'pdf');
+            formData.append('from_formats', 'docx');
+            formData.append('from_formats', 'image');
+            formData.append('force_ocr', 'true');
+            formData.append('image_export_mode', 'placeholder');
+            formData.append('ocr_lang', 'en');
+            formData.append('ocr_lang', 'ko');
+            formData.append('table_mode', 'fast');
+            formData.append('files', fileBuffer, {filename: 'document'});
+            formData.append('abort_on_error', 'false');
+            formData.append('to_formats', 'md');
+            formData.append('return_as_file', 'false');
+            formData.append('do_ocr', 'true');
+
+            console.log('[Docling Parse] Sending request to', DOCLING_URL);
+
+            const response = await Promise.race([
+                fetch(`${DOCLING_URL}/v1alpha/convert/file`, {
+                    method: 'POST',
+                    headers: {'accept': 'application/json'},
+                    body: formData
+                }),
+                new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Docling request timeout after 5 minutes')), 300000)
+                )
+            ]) as Response;
+
+            console.log('[Docling Parse] Response received:', response.status);
+
+            if (!response.ok) {
+                throw new Error(`Docling service error: ${response.status} ${response.statusText}`)
+            }
+
+            const {document} = await response.json()
+            const {md_content} = document
+            console.log('[Docling Parse] Parse completed successfully');
+            return {document: {content: {markdown: md_content}}};
+        } catch (error) {
+            console.error('[Docling Parse] Error:', error)
+            throw new Error(`Failed to parse document with Docling: ${error instanceof Error ? error.message : String(error)}`)
+        }
     }
 
     private convertCoordinates(bbox: { l: number; t: number; r: number; b: number }, pageHeight: number) {
