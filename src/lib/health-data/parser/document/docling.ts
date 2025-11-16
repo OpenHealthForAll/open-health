@@ -43,6 +43,12 @@ export class DoclingDocumentParser extends BaseDocumentParser {
                 throw new Error(`Failed to fetch file: ${fileResponse.status} ${fileResponse.statusText}`);
             }
             const fileBuffer = await fileResponse.buffer();
+            console.log('[Docling OCR] File fetched, size:', fileBuffer.length, 'bytes');
+
+            // Extract filename from URL
+            const urlPath = new URL(options.input).pathname;
+            const filename = urlPath.split('/').pop() || 'document.pdf';
+            console.log('[Docling OCR] Using filename:', filename);
 
             const formData = new FormData();
             formData.append('ocr_engine', 'easyocr');
@@ -53,9 +59,8 @@ export class DoclingDocumentParser extends BaseDocumentParser {
             formData.append('force_ocr', 'false');
             formData.append('image_export_mode', 'placeholder');
             formData.append('ocr_lang', 'en');
-            formData.append('ocr_lang', 'ko');
             formData.append('table_mode', 'fast');
-            formData.append('files', fileBuffer, {filename: 'document'});
+            formData.append('files', fileBuffer, {filename: filename});
             formData.append('abort_on_error', 'false');
             formData.append('to_formats', 'json');
             formData.append('return_as_file', 'false');
@@ -66,7 +71,6 @@ export class DoclingDocumentParser extends BaseDocumentParser {
             const response = await Promise.race([
                 fetch(`${DOCLING_URL}/v1alpha/convert/file`, {
                     method: 'POST',
-                    headers: {'accept': 'application/json'},
                     body: formData
                 }),
                 new Promise((_, reject) =>
@@ -77,7 +81,9 @@ export class DoclingDocumentParser extends BaseDocumentParser {
             console.log('[Docling OCR] Response received:', response.status);
 
             if (!response.ok) {
-                throw new Error(`Docling service error: ${response.status} ${response.statusText}`)
+                const errorText = await response.text();
+                console.error('[Docling OCR] Error response:', errorText);
+                throw new Error(`Docling service error: ${response.status} ${response.statusText} - ${errorText}`)
             }
 
             const data = await response.json()
@@ -104,6 +110,12 @@ export class DoclingDocumentParser extends BaseDocumentParser {
                 throw new Error(`Failed to fetch file: ${fileResponse.status} ${fileResponse.statusText}`);
             }
             const fileBuffer = await fileResponse.buffer();
+            console.log('[Docling Parse] File fetched, size:', fileBuffer.length, 'bytes');
+
+            // Extract filename from URL
+            const urlPath = new URL(options.input).pathname;
+            const filename = urlPath.split('/').pop() || 'document.pdf';
+            console.log('[Docling Parse] Using filename:', filename);
 
             const formData = new FormData();
             formData.append('ocr_engine', 'easyocr');
@@ -114,9 +126,8 @@ export class DoclingDocumentParser extends BaseDocumentParser {
             formData.append('force_ocr', 'true');
             formData.append('image_export_mode', 'placeholder');
             formData.append('ocr_lang', 'en');
-            formData.append('ocr_lang', 'ko');
             formData.append('table_mode', 'fast');
-            formData.append('files', fileBuffer, {filename: 'document'});
+            formData.append('files', fileBuffer, {filename: filename});
             formData.append('abort_on_error', 'false');
             formData.append('to_formats', 'md');
             formData.append('return_as_file', 'false');
@@ -127,7 +138,6 @@ export class DoclingDocumentParser extends BaseDocumentParser {
             const response = await Promise.race([
                 fetch(`${DOCLING_URL}/v1alpha/convert/file`, {
                     method: 'POST',
-                    headers: {'accept': 'application/json'},
                     body: formData
                 }),
                 new Promise((_, reject) =>
@@ -138,7 +148,9 @@ export class DoclingDocumentParser extends BaseDocumentParser {
             console.log('[Docling Parse] Response received:', response.status);
 
             if (!response.ok) {
-                throw new Error(`Docling service error: ${response.status} ${response.statusText}`)
+                const errorText = await response.text();
+                console.error('[Docling Parse] Error response:', errorText);
+                throw new Error(`Docling service error: ${response.status} ${response.statusText} - ${errorText}`)
             }
 
             const {document} = await response.json()
