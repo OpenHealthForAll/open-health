@@ -18,7 +18,8 @@ export class UpstageDocumentParser extends BaseDocumentParser {
     }
 
     get apiKeyRequired(): boolean {
-        return currentDeploymentEnv === 'local'
+        // Only require API key if we're in local environment AND no key is provided in .env
+        return currentDeploymentEnv === 'local' && !process.env.UPSTAGE_API_KEY
     }
 
     get enabled(): boolean {
@@ -41,7 +42,11 @@ export class UpstageDocumentParser extends BaseDocumentParser {
         formData.append("schema", "oac");
         formData.append("model", "ocr-2.2.1");
 
-        const apiKey = currentDeploymentEnv === 'cloud' ? process.env.UPSTAGE_API_KEY : options.apiKey
+        // Use environment variable if available, otherwise use provided API key
+        const apiKey = process.env.UPSTAGE_API_KEY || options.apiKey;
+        if (!apiKey) {
+            throw new Error('Upstage API key is required but not provided');
+        }
         const response = await fetch('https://api.upstage.ai/v1/document-ai/ocr', {
             method: 'POST',
             body: formData,
@@ -62,7 +67,11 @@ export class UpstageDocumentParser extends BaseDocumentParser {
         formData.append("coordinates", "true");
         formData.append("model", "document-parse");
 
-        const apiKey = currentDeploymentEnv === 'cloud' ? process.env.UPSTAGE_API_KEY : options.apiKey
+        // Use environment variable if available, otherwise use provided API key
+        const apiKey = process.env.UPSTAGE_API_KEY || options.apiKey;
+        if (!apiKey) {
+            throw new Error('Upstage API key is required but not provided');
+        }
         const response = await fetch('https://api.upstage.ai/v1/document-ai/document-parse', {
             method: 'POST',
             body: formData,

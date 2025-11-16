@@ -16,7 +16,8 @@ export class GoogleVisionParser extends BaseVisionParser {
     }
 
     get apiKeyRequired(): boolean {
-        return currentDeploymentEnv === 'local'
+        // Only require API key if we're in local environment AND no key is provided in .env
+        return currentDeploymentEnv === 'local' && !process.env.GOOGLE_API_KEY
     }
 
     get enabled(): boolean {
@@ -34,9 +35,14 @@ export class GoogleVisionParser extends BaseVisionParser {
     }
 
     async parse(options: VisionParseOptions) {
+        // Use environment variable if available, otherwise use provided API key
+        const apiKey = process.env.GOOGLE_API_KEY || options.apiKey;
+        if (!apiKey) {
+            throw new Error('Google API key is required but not provided');
+        }
         const llm = new ChatGoogleGenerativeAI({
             model: options.model.id,
-            apiKey: currentDeploymentEnv === 'cloud' ? process.env.GOOGLE_API_KEY : options.apiKey,
+            apiKey: apiKey,
         });
         const messages = options.messages || ChatPromptTemplate.fromMessages([]);
 
