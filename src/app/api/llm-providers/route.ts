@@ -1,7 +1,6 @@
 import prisma, {Prisma} from "@/lib/prisma";
 import {NextResponse} from "next/server";
 import {auth} from "@/auth";
-import {decrypt} from "@/lib/encryption";
 import {currentDeploymentEnv} from "@/lib/current-deployment-env";
 
 export interface LLMProvider extends Prisma.LLMProviderGetPayload<{
@@ -36,17 +35,6 @@ export async function GET() {
                 // exclude Ollama from cloud deployment
                 if (currentDeploymentEnv === 'cloud') return !['ollama'].includes(providerId)
                 return true;
-            })
-            .map((provider) => {
-                let decryptedApiKey: string
-                try {
-                    decryptedApiKey = decrypt(provider.apiKey)
-                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                } catch (e) {
-                    decryptedApiKey = ''
-                }
-
-                return {...provider, apiKey: decryptedApiKey}
             })
     })
 }
