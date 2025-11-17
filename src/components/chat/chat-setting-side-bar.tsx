@@ -15,11 +15,11 @@ import {ConditionalDeploymentEnv} from "@/components/common/deployment-env";
 import {useTranslations} from "next-intl";
 
 interface ChatSettingSideBarProps {
-    isRightSidebarOpen: boolean;
-    chatRoomId: string;
+    readonly isRightSidebarOpen: boolean;
+    readonly chatRoomId: string;
 }
 
-export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: ChatSettingSideBarProps
+export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Readonly<ChatSettingSideBarProps>
 ) {
     const t = useTranslations('ChatSettingSideBar')
 
@@ -49,6 +49,7 @@ export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Cha
         onChangeChatRoom({
             llmProviderModelId: selectedLLMProviderModel?.id
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedLLMProviderModel]);
 
     // Initialize assistant mode from localStorage or chatRoomData
@@ -57,7 +58,7 @@ export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Cha
 
         // If no saved prompt, use the current one and save it
         setSelectedAssistantMode(chatRoomData.chatRoom.assistantMode);
-    }, [chatRoomData?.chatRoom.assistantMode?.id]);
+    }, [chatRoomData?.chatRoom.assistantMode]);
 
     useEffect(() => {
         const chatRoom = chatRoomData?.chatRoom;
@@ -73,7 +74,8 @@ export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Cha
         if (selectedLLMProviderModel === undefined && models.length > 0) {
             setSelectedLLMProviderModel(models.find((model) => model.id === chatRoom.llmProviderModelId) || models[0]);
         }
-    }, [chatRoomData, llmProvidersData, llmProviderModels]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [chatRoomData?.chatRoom, llmProvidersData?.llmProviders, llmProviderModels]);
 
     const {
         data: assistantModesData,

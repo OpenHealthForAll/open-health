@@ -40,6 +40,7 @@ export default function OnboardingPage() {
 
     useEffect(() => {
         if (currentStep === 5) submit();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentStep]);
 
     const validateCurrentStep = () => {

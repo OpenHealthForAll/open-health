@@ -537,7 +537,8 @@ const HealthDataPreview = ({healthData, formData, setFormData, setHealthData}: H
 
                 return getNearestBoundingBox(aFocusedWords[0].boundingBox, bFocusedWords[0].boundingBox);
             })
-    }, [getFocusedWords, page, currentPageTestResults, healthData, dataPerPage])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [getFocusedWords, page, currentPageTestResults, healthData, dataPerPage, userBloodTestResults?.test_result])
 
     const getFields = (): Field[] => {
         switch (healthData.type) {
@@ -643,7 +644,7 @@ const HealthDataPreview = ({healthData, formData, setFormData, setHealthData}: H
             };
         }
 
-    }, [loading, focusedItem, getFocusedWords, ocr, userBloodTestResults?.test_result, allInputsBlurred, page]);
+    }, [loading, focusedItem, getFocusedWords, ocr, userBloodTestResults?.test_result, allInputsBlurred, page, currentPageTestResults, userBloodTestResultsPage]);
 
     useEffect(() => {
         document.querySelector('#test-result')?.scrollTo(0, 0);
