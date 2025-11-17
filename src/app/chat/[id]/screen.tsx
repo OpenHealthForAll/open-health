@@ -26,7 +26,6 @@ export default function Screen(
 ) {
     const {id} = useParams<{ id: string }>();
     const t = useTranslations('Chat')
-    const tf = useTranslations('Feedback')
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -106,11 +105,6 @@ export default function Screen(
             }
             await mutate();
         }
-    };
-
-    const handleCloseFeedbackBanner = () => {
-        setShowFeedbackBanner(false);
-        localStorage.setItem('feedbackBannerClosed', 'true');
     };
 
     return (
