@@ -91,9 +91,27 @@ async function inference(inferenceOptions: InferenceOptions) {
     const pageDataList: { page_content: string }[] | undefined = !excludeText ? await processBatchWithConcurrency(
         imagePaths,
         async (path) => {
-            const {content} = await documentParse({document: path, documentParser: documentParserOptions})
-            const {markdown} = content
-            return {page_content: markdown}
+            try {
+                const result = await documentParse({document: path, documentParser: documentParserOptions})
+                if (!result) {
+                    console.warn('[Inference] Document parse returned undefined for path:', path)
+                    return {page_content: ''}
+                }
+                const {content} = result
+                if (!content) {
+                    console.warn('[Inference] Document parse returned no content for path:', path)
+                    return {page_content: ''}
+                }
+                const {markdown} = content
+                if (!markdown) {
+                    console.warn('[Inference] Document parse returned no markdown for path:', path)
+                    return {page_content: ''}
+                }
+                return {page_content: markdown}
+            } catch (error) {
+                console.error('[Inference] Error parsing document:', error)
+                return {page_content: ''}
+            }
         },
         2
     ) : undefined

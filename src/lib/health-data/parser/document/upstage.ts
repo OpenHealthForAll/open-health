@@ -78,6 +78,23 @@ export class UpstageDocumentParser extends BaseDocumentParser {
             headers: {Authorization: `Bearer ${apiKey}`}
         })
 
-        return {document: await response.json()}
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Upstage API error: ${response.status} ${response.statusText} - ${errorText}`);
+        }
+
+        const responseData = await response.json();
+
+        // Extract markdown content from Upstage response
+        // Upstage returns: { "document": { "pages": [...], "metadata": {...} } }
+        // We need to extract the markdown content
+        let markdown = '';
+        if (responseData.document?.pages) {
+            markdown = responseData.document.pages
+                .map((page: Record<string, unknown>) => (page.content as string) || '')
+                .join('\n');
+        }
+
+        return {document: {content: {markdown}}}
     }
 }
