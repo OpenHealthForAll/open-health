@@ -4,14 +4,6 @@ export function NavLinks() {
     return (
         <div className="hidden items-center gap-4 mr-4 md:flex">
             <a
-                href="https://tally.so/r/3xl2GE"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-800 transition-colors font-medium"
-            >
-                Feedback
-            </a>
-            <a
                 href="https://github.com/OpenHealthForAll/open-health"
                 target="_blank"
                 rel="noopener noreferrer"
