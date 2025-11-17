@@ -194,7 +194,7 @@ export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Cha
                             <SelectTrigger>
                                 <SelectValue placeholder={t('selectCompany')}/>
                             </SelectTrigger>
-                            <SelectContent className={cn('bg-white')}>
+                            <SelectContent className={cn('bg-white max-h-64 overflow-y-auto')}>
                                 {llmProvidersData?.llmProviders.map((provider) => <SelectItem
                                     key={provider.id}
                                     value={provider.id}>{provider.name}</SelectItem>)}
@@ -205,7 +205,7 @@ export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Cha
                             <SelectTrigger>
                                 <SelectValue placeholder={t('selectModel')}/>
                             </SelectTrigger>
-                            <SelectContent className={cn('bg-white')}>
+                            <SelectContent className={cn('bg-white max-h-64 overflow-y-auto')}>
                                 {llmProviderModels.map((model) => (
                                     <SelectItem key={model.id} value={model.id}>
                                         {model.name}
@@ -227,7 +227,7 @@ export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Cha
                                     onChange={(e) => onLLMProviderChange({apiURL: e.target.value})}
                                 />
                             )}
-                            {selectedLLMProvider?.providerId !== 'ollama' && (
+                            {selectedLLMProvider?.providerId !== 'ollama' && selectedLLMProvider?.apiKeyRequired && (
                                 <div className="relative">
                                     <Input
                                         type={showApiKey ? "text" : "password"}
@@ -242,6 +242,11 @@ export default function ChatSettingSideBar({isRightSidebarOpen, chatRoomId}: Cha
                                     >
                                         {showApiKey ? t('hide') : t('show')}
                                     </button>
+                                </div>
+                            )}
+                            {selectedLLMProvider?.providerId !== 'ollama' && !selectedLLMProvider?.apiKeyRequired && (
+                                <div className="p-2 bg-green-50 border border-green-200 rounded-md text-sm text-green-700">
+                                    {t('apiKeyConfigured')}
                                 </div>
                             )}
                         </ConditionalDeploymentEnv>
