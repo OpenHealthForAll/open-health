@@ -41,7 +41,7 @@
     "langsmith": "^0.3.10",
     "lucide-react": "^0.473.0",
     "negotiator": "^1.0.0",
-    "next": "15.1.6",
+    "next": "15.1.11",
     "next-auth": "^5.0.0-beta.25",
     "next-intl": "^3.26.4",
     "openai": "^4.80.0",
