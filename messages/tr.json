@@ -1,0 +1,203 @@
+{
+  "HomePage": {
+  },
+  "Chat": {
+    "inputPlaceholder": "Mesajınızı yazın..."
+  },
+  "Feedback": {
+    "helpMessage": "OpenHealth'in sağlık sorunlarını sizin ve başkaları için çözmesine yardımcı olun",
+    "shareFeedback": "Geri Bildirim Paylaş",
+    "needHelpWithYourIssue": "Sorununuzla ilgili yardıma mı ihtiyacınız var?",
+    "askADoctor": "Bir Doktora Sor"
+  },
+  "ChatSideBar": {
+    "sources": "Kaynaklar",
+    "numberOfFiles": "{value, number} dosya",
+    "countOfTokens": "{value, number} token",
+    "viewAggregatedSources": "Toplu kaynakları görüntüle",
+    "aggregatedSources": "Toplu Kaynaklar",
+    "manageSources": "Kaynakları Yönet",
+    "newChat": "Yeni Sohbet",
+    "copy": "Kopyala",
+    "download": "İndir",
+    "chatDeleteTitle": "Sohbeti Sil",
+    "chatDeleteMessage": "Bu sohbeti silmek istediğinizden emin misiniz?",
+    "chatDeleteMessageDetail": "Bu işlem geri alınamaz.",
+    "cancel": "İptal",
+    "delete": "Sil"
+  },
+  "ChatSettingSideBar": {
+    "modelSettings": "Model Ayarları",
+    "systemPrompt": "Sistem Komutu",
+    "assistantMode": "Asistan Modu",
+    "addAssistant": "Asistan Ekle",
+    "selectModel": "Model Seç",
+    "selectCompany": "Şirket Seç",
+    "noModelsFound": "Model bulunamadı.",
+    "enterApiKey": "API Anahtarını Girin",
+    "show": "Göster",
+    "hide": "Gizle"
+  },
+  "AssistantPage": {
+    "backToChat": "Sohbete Dön",
+    "addNewAssistant": "Yeni Asistan Ekle",
+    "createCustomAssistant": "Kendi ayarlarınızla özel bir asistan oluşturun",
+    "assistantName": "Asistan Adı",
+    "assistantNamePlaceholder": "örneğin, Tıbbi Asistan",
+    "description": "Açıklama",
+    "descriptionPlaceholder": "Bu asistanın ne yaptığını açıklayın...",
+    "descriptionHelp": "Asistanın amacı ve yetenekleri hakkında ayrıntılı bir açıklama sağlayın.",
+    "isPublic": "Bu asistanı herkese açık yap",
+    "isPublicHelp": "Herkese açık olursa, diğerleri bu asistanı kullanabilir. Bilginizi paylaşın.",
+    "systemPrompt": "Sistem Komutu",
+    "systemPromptPlaceholder": "Bu asistan için sistem komutunu girin...",
+    "systemPromptHelp": "Sistem komutu, asistanın davranışını ve bilgi tabanını tanımlar.",
+    "context": "Bağlam",
+    "contextPlaceholder": "Bu asistan için ek bağlam ekleyin...",
+    "contextHelp": "Ek bağlam, asistanın belirli alanları veya kullanıcı ihtiyaçlarını anlamasına yardımcı olur.",
+    "cancel": "İptal",
+    "createAssistant": "Asistan Oluştur"
+  },
+  "SourceManagement": {
+    "title": "Kaynak Yönetimi",
+    "addSource": "Kaynak Ekle",
+    "addNewSource": "Yeni Kaynak Ekle",
+    "personalInfo": "Kişisel Bilgiler",
+    "parsingSettings": "Ayrıştırma Ayarları",
+    "parsingSettingsDescription": "Ayrıştırma performansını artırmak için Görüntü ve OCR modelleri birlikte kullanılır.",
+    "visionModel": "Görüntü Modeli",
+    "visionModelDescription": "Yalnızca görüntü yeteneklerine sahip modeller kullanılabilir.",
+    "documentModel": "Belge Modeli",
+    "documentModelDescription": "Docling, yerel olarak çalışan açık kaynaklı bir ayrıştırma modelidir.",
+    "documentModelDoclingGithub": "Github",
+    "documentModelUpstage": "Upstage",
+    "documentModelUpstageDescription": "Upstage, testlerimizde en iyi performansı gösterdi.",
+    "documentModelUpstageDescription2": "Yeni kayıtlar için $10 ücretsiz kredi sunar, kart gerekmez.",
+    "name": "Ad",
+    "birthdate": "Doğum Tarihi",
+    "height": "Boy",
+    "weight": "Kilo",
+    "bloodType": "Kan Grubu",
+    "familyHistory": "Aile Geçmişi",
+    "select": "Seç",
+    "extractedData": "Çıkarılan Veriler",
+    "update": "Güncelle",
+    "uploadFiles": "Dosya Yükle",
+    "uploadFilesDescription": "Görüntü veya PDF dosyaları ekleyin.",
+    "uploadSymptoms": "Yeni Semptomlar",
+    "uploadSymptomsDescription": "Bugünkü semptomları kaydedin.",
+    "date": "Tarih",
+    "endDate": "Bitiş Tarihi",
+    "description": "Açıklama",
+    "symptoms": "Semptomlar",
+    "selectModel": "Model Seç",
+    "apiKey": "API Anahtarı",
+    "enterYourAPIKey": "API anahtarınızı girin",
+    "enterYourAPIUrl": "API URL'nizi girin"
+  },
+  "DynamicForm": {
+    "selectPlaceholder": "Seç..."
+  },
+  "LoginPage": {
+    "username": "Kullanıcı Adı",
+    "usernamePlaceholder": "Kullanıcı adınızı girin",
+    "password": "Şifre",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "Giriş Yap",
+    "needSignUp": "Hesabınız yok mu? Kayıt olun",
+    "alreadyHaveAccount": "Zaten hesabınız var mı? Giriş yapın",
+    "signUp": "Hesap Oluştur",
+    "invalidEmailFormat": "Geçersiz e-posta formatı"
+  },
+  "Onboarding": {
+    "introduction": {
+      "title": "Sağlık Çözücüsü",
+      "subtitle": "OpenHealth tarafından",
+      "description": "Çözülemeyen sağlık sorunlarınız mı var?\nBırakın yapay zeka verilerinize derinlemesine baksın",
+      "privacyNotice": "Toplanan veriler yalnızca sağlık sorunlarınızı çözmek için kullanılacaktır.",
+      "runLocally": "Yerel olarak çalıştırabilirsiniz",
+      "here": "burada"
+    },
+    "healthConcerns": {
+      "title": "Sağlık Sorunları",
+      "description": "Lütfen mevcut sağlık sorunlarınızı ayrıntılı olarak açıklayın",
+      "placeholder": "Örnek:\n- Hangi semptomları yaşıyorsunuz?\n- Ne zaman başladılar?\n- Semptomları kötüleştiren şeyler neler?\n- Daha önce benzer semptomlar yaşadınız mı?",
+      "error": "Lütfen sağlık sorunlarınızı açıklayın"
+    },
+    "personalInfo": {
+      "title": "Kişisel Bilgiler",
+      "description": "Profilinizi daha iyi anlamamıza yardımcı olun",
+      "gender": {
+        "label": "Cinsiyet",
+        "male": "Erkek",
+        "female": "Kadın",
+        "error": "Lütfen cinsiyetinizi seçin"
+      },
+      "birthDate": {
+        "label": "Doğum Tarihi",
+        "error": "Lütfen doğum tarihinizi girin"
+      },
+      "height": {
+        "label": "Boy",
+        "placeholder": {
+          "cm": "170",
+          "ft": "5.6"
+        },
+        "error": "Lütfen boyunuzu girin"
+      },
+      "weight": {
+        "label": "Kilo",
+        "placeholder": {
+          "kg": "65",
+          "lb": "143"
+        },
+        "error": "Lütfen kilonuzu girin"
+      },
+      "ethnicity": {
+        "label": "Etnik Köken",
+        "placeholder": "Etnik kökeninizi seçin",
+        "options": {
+          "east_asian": "Doğu Asyalı",
+          "southeast_asian": "Güneydoğu Asyalı",
+          "south_asian": "Güney Asyalı",
+          "european": "Avrupalı",
+          "middle_eastern": "Orta Doğulu/Kuzey Afrikalı",
+          "african": "Afrikalı",
+          "african_american": "Afro-Amerikalı",
+          "pacific_islander": "Pasifik Adalı",
+          "native_american": "Yerli Amerikalı/İlkel",
+          "hispanic": "Hispanik/Latin",
+          "mixed": "Karışık Etnik Köken",
+          "other": "Diğer"
+        },
+        "error": "Lütfen etnik kökeninizi seçin"
+      },
+      "country": {
+        "label": "Ülke",
+        "placeholder": "Ülke adınızı yazın",
+        "error": "Lütfen ülkenizi seçin"
+      }
+    },
+    "medicalRecords": {
+      "title": "Tıbbi Kayıtlar",
+      "description": "Daha iyi analiz için tıbbi kayıtlarınızı yükleyin (İsteğe bağlı)",
+      "dragDrop": {
+        "title": "Dosyalarınızı buraya sürükleyip bırakın",
+        "or": "veya",
+        "browse": "Dosyalara Göz At",
+        "supportedFormats": "Desteklenen formatlar: PDF, JPEG, PNG, DOC"
+      }
+    },
+    "analysis": {
+      "description": "Yapay zeka sağlık verilerinizi analiz ediyor\nve kişiselleştirilmiş sağlık içgörüleri sunuyor"
+    },
+    "navigation": {
+      "back": "Geri",
+      "next": "İleri",
+      "skip": "Atla"
+    },
+    "healthSolver": {
+      "message": "Sağlık sorunlarımı anlat"
+    }
+  }
+}
