@@ -1,7 +1,7 @@
 FROM node:lts-alpine
 LABEL authors="OpenHealth"
 
-RUN apk add -U graphicsmagick
+RUN apk add -U graphicsmagick ghostscript
 
 WORKDIR /app
 
